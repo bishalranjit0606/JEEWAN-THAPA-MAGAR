@@ -403,7 +403,7 @@
       border-radius: 50px;
       border: 1px solid var(--accent-gold);
       font-weight: 600;
-      font-size: 0.7rem;
+      font-size: 0.6rem;
       letter-spacing: 1px;
       text-transform: uppercase;
       color: var(--accent-gold);
@@ -502,6 +502,35 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
+    }
+
+    /* Horizontal scroll for Results */
+    .ba-scroll-wrapper {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 0.75rem;
+    }
+
+    .ba-scroll {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+    }
+
+    .ba-scroll .ba-card {
+      width: 360px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+    }
+
+    /* Scrollbar styling */
+    .ba-scroll-wrapper::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .ba-scroll-wrapper::-webkit-scrollbar-thumb {
+      background: var(--border-light);
+      border-radius: 10px;
     }
 
     .ba-card {
@@ -755,20 +784,23 @@
     }
 
     .bmi-result-box {
-      margin-top: 2rem;
-      padding: 1.5rem;
+      margin-top: 0;
+      padding: 0;
       background: var(--bg-body);
       border-radius: 6px;
       text-align: center;
       border-left: 4px solid var(--accent-gold);
+      max-height: 0;
+      overflow: hidden;
       opacity: 0;
-      transform: translateY(10px);
       transition: all 0.4s ease;
     }
 
     .bmi-result-box.show {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      max-height: 300px;
       opacity: 1;
-      transform: translateY(0);
     }
 
     .bmi-score {
@@ -1058,37 +1090,39 @@
         <h2>Real Results</h2>
         <span></span>
       </div>
-      <div class="ba-grid">
-        <div class="ba-card">
-          <div class="ba-images">
-            <div class="ba-img"
-              style="background-image: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=500&q=80');">
-              <span class="ba-badge badge-left">Before</span>
+      <div class="ba-scroll-wrapper">
+        <div class="ba-grid ba-scroll">
+          <div class="ba-card">
+            <div class="ba-images">
+              <div class="ba-img"
+                style="background-image: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=500&q=80');">
+                <span class="ba-badge badge-left">Before</span>
+              </div>
+              <div class="ba-img"
+                style="background-image: url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=500&q=80');">
+                <span class="ba-badge badge-right">After</span>
+              </div>
             </div>
-            <div class="ba-img"
-              style="background-image: url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=500&q=80');">
-              <span class="ba-badge badge-right">After</span>
-            </div>
-          </div>
-          <div style="padding: 1.5rem; text-align: center; background: var(--bg-surface);">
-            <h4>12 Week Cut</h4>
-            <p>Total Fat Loss: 18 lbs</p>
-          </div>
-        </div>
-        <div class="ba-card">
-          <div class="ba-images">
-            <div class="ba-img"
-              style="background-image: url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=500&q=80');">
-              <span class="ba-badge badge-left">Before</span>
-            </div>
-            <div class="ba-img"
-              style="background-image: url('https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=500&q=80');">
-              <span class="ba-badge badge-right">After</span>
+            <div style="padding: 1.5rem; text-align: center; background: var(--bg-surface);">
+              <h4>12 Week Cut</h4>
+              <p>Total Fat Loss: 18 lbs</p>
             </div>
           </div>
-          <div style="padding: 1.5rem; text-align: center; background: var(--bg-surface);">
-            <h4>6 Month Bulk</h4>
-            <p>Muscle Gained: 12 lbs</p>
+          <div class="ba-card">
+            <div class="ba-images">
+              <div class="ba-img"
+                style="background-image: url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=500&q=80');">
+                <span class="ba-badge badge-left">Before</span>
+              </div>
+              <div class="ba-img"
+                style="background-image: url('https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=500&q=80');">
+                <span class="ba-badge badge-right">After</span>
+              </div>
+            </div>
+            <div style="padding: 1.5rem; text-align: center; background: var(--bg-surface);">
+              <h4>6 Month Bulk</h4>
+              <p>Muscle Gained: 12 lbs</p>
+            </div>
           </div>
         </div>
       </div>
