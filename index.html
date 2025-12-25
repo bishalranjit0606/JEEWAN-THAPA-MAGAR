@@ -109,12 +109,12 @@
     }
 
     .section-padding {
-      padding: 6rem 0;
+      padding: 4rem 0;
     }
 
     .section-header {
       text-align: center;
-      margin-bottom: 4rem;
+      margin-bottom: 2.5rem;
     }
 
     .section-header h2 {
@@ -464,7 +464,12 @@
     .services-scroll-wrapper {
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      padding-bottom: 0.5rem;
+      padding-bottom: 1rem;
+      /* Added space for shadow */
+      margin: 0 -1rem;
+      /* Negative margin to allow full bleed scroll feeling if needed, or just standard */
+      padding: 0.5rem 1rem 1.5rem 1rem;
+      /* Top, Right, Bottom (shadow), Left */
     }
 
     .services-scroll {
@@ -532,7 +537,7 @@
     .ba-scroll-wrapper {
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      padding-bottom: 0.75rem;
+      padding: 0.5rem 1rem 1.5rem 1rem;
     }
 
     .ba-scroll {
@@ -609,7 +614,7 @@
     .reviews-scroll-wrapper {
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      padding-bottom: 0.5rem;
+      padding: 0.5rem 1rem 1.5rem 1rem;
     }
 
     .reviews-scroll {
@@ -674,8 +679,8 @@
     .cert-scroll-wrapper {
       position: relative;
       overflow-x: auto;
-      padding-bottom: 0.5rem;
       scroll-snap-type: x mandatory;
+      padding: 0.5rem 1rem 1.5rem 1rem;
     }
 
     .cert-scroll {
@@ -932,7 +937,7 @@
       }
 
       .section-padding {
-        padding: 4rem 0;
+        padding: 3rem 0;
       }
 
       .section-header {
