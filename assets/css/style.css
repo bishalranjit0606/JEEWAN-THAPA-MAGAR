@@ -376,8 +376,8 @@ img {
 }
 
 .home__container {
-  padding-top: 5rem;
-  gap: 2.5rem;
+  padding-top: 3rem;
+  gap: 2rem;
 }
 
 .home__data {
@@ -419,7 +419,7 @@ img {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 450px;
+  max-width: 320px;
   margin: 0 auto;
   border-radius: 16px;
   box-shadow: var(--shadow-lg);
