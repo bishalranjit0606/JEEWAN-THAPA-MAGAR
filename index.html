@@ -1,642 +1,1176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Premium Personal Training Portfolio">
+  <title>ALEX MORGAN | Elite Performance Coach</title>
 
-  <!-- =================== FAVICON ================ -->
-  <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
 
-  <!-- ================== REMIXICON =================== -->
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- ================== CSS ================= -->
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* --- CSS VARIABLES & THEME CONFIGURATION --- */
+    :root {
+      /* Dark Theme (Default) */
+      --bg-body: #050a14;
+      --bg-surface: #0f172a;
+      --bg-surface-transparent: rgba(15, 23, 42, 0.85);
+      --text-primary: #ffffff;
+      --text-secondary: #94a3b8;
+      --accent-gold: #c6a87c;
+      --accent-gold-hover: #e0c69e;
+      --border-light: rgba(198, 168, 124, 0.15);
+      --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      --transition-speed: 0.3s;
+    }
 
-  <title>Jeewan Thapa Magar - Professional Fitness Trainer</title>
+    [data-theme="light"] {
+      --bg-body: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-surface-transparent: rgba(255, 255, 255, 0.9);
+      --text-primary: #1e293b;
+      --text-secondary: #64748b;
+      --accent-gold: #b08d55;
+      --accent-gold-hover: #8c6b3a;
+      --border-light: rgba(176, 141, 85, 0.2);
+      --shadow-premium: 0 10px 30px -10px rgba(176, 141, 85, 0.15);
+    }
+
+    /* --- GLOBAL RESET & TYPOGRAPHY --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-primary);
+      transition: background-color 0.4s ease, color 0.4s ease;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+    }
+
+    p {
+      color: var(--text-secondary);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* --- UTILITY CLASSES --- */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-padding {
+      padding: 6rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .section-header span {
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--accent-gold);
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+
+    .text-gold {
+      color: var(--accent-gold);
+    }
+
+    /* --- NAVIGATION BAR --- */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--bg-surface-transparent);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-light);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      box-shadow: var(--shadow-premium);
+      background: var(--bg-surface);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      transition: color 0.3s ease;
+    }
+
+    .nav-brand:hover {
+      color: var(--accent-gold);
+    }
+
+    .nav-brand .highlight {
+      color: var(--accent-gold);
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--accent-gold);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-toggle {
+      background: transparent;
+      border: 1px solid var(--border-light);
+      color: var(--accent-gold);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      border-color: var(--accent-gold);
+      background: var(--accent-gold);
+      color: #000;
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    /* Mobile Navigation */
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: var(--bg-surface);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 2rem 0;
+        gap: 1.5rem;
+        transition: left 0.3s ease;
+        border-top: 1px solid var(--border-light);
+      }
+
+      .nav-menu.active {
+        left: 0;
+      }
+
+      .nav-link {
+        font-size: 1.1rem;
+      }
+
+      .mobile-menu-toggle {
+        display: block;
+      }
+
+      .nav-brand {
+        font-size: 1rem;
+      }
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding-top: 70px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(to bottom, rgba(5, 10, 20, 0.7), var(--bg-body)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+    }
+
+    .hero-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+      max-width: 1200px;
+      padding: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 500px;
+      animation: fadeInUp 1s ease-out;
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .trainer-image-wrapper {
+      position: relative;
+      animation: fadeInUp 1s ease-out 0.3s backwards;
+      flex: 0 0 auto;
+    }
+
+    .trainer-frame {
+      position: relative;
+      width: 350px;
+      height: 450px;
+      padding: 12px;
+      background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-hover) 100%);
+      border-radius: 20px;
+      box-shadow:
+        0 20px 60px rgba(198, 168, 124, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+        0 0 40px rgba(198, 168, 124, 0.2);
+      transition: all 0.4s ease;
+    }
+
+    .trainer-frame:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow:
+        0 30px 80px rgba(198, 168, 124, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+        0 0 60px rgba(198, 168, 124, 0.3);
+    }
+
+    .trainer-frame::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      right: 6px;
+      bottom: 6px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+      border-radius: 16px;
+      pointer-events: none;
+    }
+
+    .trainer-frame::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(45deg, var(--accent-gold), transparent, var(--accent-gold));
+      border-radius: 22px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      animation: rotate 3s linear infinite;
+    }
+
+    .trainer-frame:hover::after {
+      opacity: 0.6;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .trainer-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .trainer-badge {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-surface-transparent);
+      backdrop-filter: blur(10px);
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      border: 1px solid var(--accent-gold);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--accent-gold);
+      color: #000;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--accent-gold);
+    }
+
+    .btn-primary:hover {
+      background-color: transparent;
+      color: var(--accent-gold);
+      transform: translateY(-3px);
+    }
+
+    /* --- SERVICES GRID --- */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: var(--bg-surface);
+      padding: 3rem 2rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-light);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-premium);
+      border-color: var(--accent-gold);
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      color: var(--accent-gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .service-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    /* --- BEFORE & AFTER --- */
+    .ba-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .ba-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow-premium);
+    }
+
+    .ba-images {
+      display: flex;
+      height: 350px;
+    }
+
+    .ba-img {
+      flex: 1;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      transition: flex 0.5s ease;
+    }
+
+    .ba-img:hover {
+      flex: 1.5;
+    }
+
+    .ba-badge {
+      position: absolute;
+      top: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      border-radius: 4px;
+    }
+
+    .badge-left {
+      left: 15px;
+    }
+
+    .badge-right {
+      right: 15px;
+    }
+
+    /* --- TESTIMONIALS --- */
+    .testimonials {
+      background: var(--bg-surface);
+    }
+
+    .testimonial-slider {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonial-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .testimonial-card {
+      min-width: 100%;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .client-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid var(--accent-gold);
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+    }
+
+    .quote-icon {
+      color: var(--border-light);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .client-text {
+      font-size: 1.1rem;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .client-name {
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+    }
+
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 2rem;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--border-light);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .dot.active {
+      background: var(--accent-gold);
+    }
+
+    /* --- CERTIFICATIONS --- */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .cert-item {
+      background: var(--bg-surface);
+      padding: 2rem;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .cert-item:hover {
+      border-color: var(--accent-gold);
+      transform: translateY(-5px);
+    }
+
+    .cert-icon {
+      font-size: 2.5rem;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+    }
+
+    /* --- BMI CALCULATOR --- */
+    .bmi-section {
+      background: linear-gradient(135deg, var(--bg-surface) 0%, var(--bg-body) 100%);
+      border-top: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .bmi-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--bg-surface-transparent);
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow-premium);
+      border: 1px solid var(--border-light);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem;
+      background: var(--bg-body);
+      border: 1px solid var(--border-light);
+      color: var(--text-primary);
+      border-radius: 6px;
+      font-family: inherit;
+      transition: 0.3s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+    }
+
+    .btn-block {
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .bmi-result-box {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: var(--bg-body);
+      border-radius: 6px;
+      text-align: center;
+      border-left: 4px solid var(--accent-gold);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease;
+    }
+
+    .bmi-result-box.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .bmi-score {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      line-height: 1;
+    }
+
+    /* --- CONTACT & FOOTER --- */
+    footer {
+      background: var(--bg-surface);
+      padding: 4rem 0 2rem;
+      text-align: center;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-icon {
+      width: 50px;
+      height: 50px;
+      border: 1px solid var(--border-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      transition: 0.3s;
+    }
+
+    .social-icon:hover {
+      background: var(--accent-gold);
+      color: #000;
+      border-color: var(--accent-gold);
+      transform: translateY(-5px);
+    }
+
+    .footer-copy {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* --- ANIMATIONS --- */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 768px) {
+      .hero-container {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .hero-content {
+        order: 1;
+      }
+
+      .trainer-image-wrapper {
+        order: 2;
+      }
+
+      .trainer-frame {
+        width: 280px;
+        height: 360px;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .section-padding {
+        padding: 4rem 0;
+      }
+
+      .bmi-wrapper {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .hero-container {
+        gap: 3rem;
+      }
+
+      .trainer-frame {
+        width: 300px;
+        height: 400px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <!-- ==================== HEADER ===================== -->
-  <header class="header" id="header">
-    <nav class="nav container">
-      <a href="#" class="nav__logo">
-        <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=40&h=40&fit=crop" alt="logo" /> Jeewan
-        Thapa Magar
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <span class="highlight">Jeewan</span> Thapa Magar
       </a>
 
-      <div class="nav__menu" id="nav-menu">
-        <ul class="nav__list">
-          <li class="nav__item">
-            <a href="#home" class="nav__link">Home</a>
-          </li>
-          <li class="nav__item">
-            <a href="#program" class="nav__link">Program</a>
-          </li>
-          <li class="nav__item">
-            <a href="#choose" class="nav__link">Choose Us</a>
-          </li>
-          <li class="nav__item">
-            <a href="#pricing" class="nav__link">Pricing</a>
-          </li>
-          <li class="nav__item">
-            <a href="#certifications" class="nav__link">Certifications</a>
-          </li>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#results" class="nav-link">Results</a></li>
+        <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+        <li><a href="#certifications" class="nav-link">Certifications</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
 
-          <div class="nav__link">
-            <a href="#footer" class="button nav__button">Register Now</a>
-          </div>
-        </ul>
-
-        <div class="nav__close" id="nav-close">
-          <i class="ri-close-line"></i>
-        </div>
-      </div>
-
-      <div class="nav__actions">
-        <!-- Theme toggle button -->
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-          <i class="ri-sun-line" id="theme-icon"></i>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+          <i class="fas fa-moon"></i>
         </button>
+        <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
 
-        <!-- Menu toggle button -->
-        <div class="nav__toggle" id="nav-toggle">
-          <i class="ri-menu-line"></i>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-container">
+      <div class="trainer-image-wrapper">
+        <div class="trainer-frame">
+          <img src="main.jpeg" alt="Professional Trainer" class="trainer-image">
+          <div class="trainer-badge">Certified Coach</div>
         </div>
       </div>
-    </nav>
-  </header>
-
-  <!-- ==================== MAIN ===================== -->
-  <main class="main">
-    <!-- ================ HOME =================== -->
-    <section class="home section" id="home">
-      <div class="home__container container grid">
-        <div class="home__data">
-          <h2 class="home__subtitle">MAKE YOUR</h2>
-          <h1 class="home__title">BODY SHAPE</h1>
-          <p class="home__description">
-            In here we will help you to shape and build your ideal body and
-            live your life to the fullest.
-          </p>
-          <a href="#" class="button button__flex">
-            Get Started <i class="ri-arrow-right-line"></i>
-          </a>
-        </div>
-
-        <div class="home__images">
-          <img src="main.jpeg" alt="Jeewan Thapa Magar - Professional Fitness Trainer" class="home__img" />
-        </div>
+      <div class="hero-content">
+        <h4 class="text-gold" style="font-weight: 600; letter-spacing: 2px; margin-bottom: 1rem;">ELITE FITNESS COACHING
+        </h4>
+        <h1 class="hero-title">TRANSFORM<br>YOUR BODY</h1>
+        <p class="hero-subtitle">Professional training plans tailored to your physiology and goals.</p>
+        <a href="#contact" class="btn-primary">Start Your Journey</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="logos section">
-      <div class="logos__container container grid">
-        <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=200&h=100&fit=crop" alt="logo img"
-          class="logos__img" />
-        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=200&h=100&fit=crop" alt="logo img"
-          class="logos__img" />
-        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=100&fit=crop" alt="logo img"
-          class="logos__img" />
-        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=200&h=100&fit=crop" alt="logo img"
-          class="logos__img" />
+  <section class="section-padding container" id="services">
+    <div class="section-header">
+      <h2>Expert Services</h2>
+      <span></span>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <i class="fas fa-dumbbell service-icon"></i>
+        <h3>Hypertrophy Training</h3>
+        <p>Scientifically backed resistance training focused on lean muscle acquisition and strength gains.</p>
       </div>
-    </section>
-
-    <!-- =================== PROGRAM ================= -->
-    <section class="program section" id="program">
-      <div class="container">
-        <div class="section__data">
-          <h2 class="section__subtitle">Our Program</h2>
-          <div class="section__titles">
-            <h1 class="section__title-border">BUILD YOUR</h1>
-            <h1 class="section__title">BEST BODY</h1>
-          </div>
-        </div>
-
-        <div class="program__container grid">
-          <article class="program__card">
-            <h3 class="program__title">Flex Muscle</h3>
-
-            <p class="program__description">
-              Creating tension that's temporarily making the muscle fibers
-              smaller or contracted.
-            </p>
-
-            <a href="#" class="program__button">
-              <i class="ri-arrow-right-line"></i>
-            </a>
-          </article>
-
-          <article class="program__card">
-            <h3 class="program__title">Cardio Exercise</h3>
-
-            <p class="program__description">
-              Exercise your heart rate up and keeps it up for a prolonged
-              period of time.
-            </p>
-
-            <a href="#" class="program__button">
-              <i class="ri-arrow-right-line"></i>
-            </a>
-          </article>
-
-          <article class="program__card">
-            <h3 class="program__title">Basic Yoga</h3>
-
-            <p class="program__description">
-              Diaphragmatic this is the most common breathing technique you'll
-              find in yoga.
-            </p>
-
-            <a href="#" class="program__button">
-              <i class="ri-arrow-right-line"></i>
-            </a>
-          </article>
-
-          <article class="program__card">
-            <h3 class="program__title">Weight Lifting</h3>
-
-            <p class="program__description">
-              Attempts a maximum weight single lift of a barbell loaded with
-              weight plates.
-            </p>
-
-            <a href="#" class="program__button">
-              <i class="ri-arrow-right-line"></i>
-            </a>
-          </article>
-        </div>
+      <div class="service-card">
+        <i class="fas fa-heart-pulse service-icon"></i>
+        <h3>Cardiovascular Health</h3>
+        <p>Custom HIIT and endurance protocols to improve V02 max and heart health efficiently.</p>
       </div>
-    </section>
+      <div class="service-card">
+        <i class="fas fa-bowl-food service-icon"></i>
+        <h3>Nutrition Planning</h3>
+        <p>Macro-nutrient analysis and meal planning designed to fuel performance, not just weight loss.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-laptop-medical service-icon"></i>
+        <h3>Online Coaching</h3>
+        <p>24/7 access to training apps, form checks, and weekly video consultations worldwide.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- =============== CHOOSE US =================== -->
-    <section class="choose section" id="choose">
-      <div class="choose__overflow">
-        <div class="choose__container container grid">
-          <div class="choose__content">
-            <div class="section__data">
-              <h2 class="section__subtitle">Best Reason</h2>
-              <div class="section__titles">
-                <h1 class="section__title-border">WHY</h1>
-                <h1 class="section__title">CHOOSE US ?</h1>
-              </div>
+  <section class="section-padding" style="background: var(--bg-surface);" id="results">
+    <div class="container">
+      <div class="section-header">
+        <h2>Real Results</h2>
+        <span></span>
+      </div>
+      <div class="ba-grid">
+        <div class="ba-card">
+          <div class="ba-images">
+            <div class="ba-img"
+              style="background-image: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=500&q=80');">
+              <span class="ba-badge badge-left">Before</span>
             </div>
-
-            <p class="choose__description">
-              Choose your favorite class and start now. Remember the only bad
-              workout is the one you didn't do.
-            </p>
-
-            <div class="choose__data">
-              <div class="choose__group">
-                <h3 class="choose__number">200+</h3>
-                <p class="choose__subtitle">Total Members</p>
-              </div>
-              <div class="choose__group">
-                <h3 class="choose__number">50+</h3>
-                <p class="choose__subtitle">Best trainers</p>
-              </div>
-              <div class="choose__group">
-                <h3 class="choose__number">25+</h3>
-                <p class="choose__subtitle">Programs</p>
-              </div>
-              <div class="choose__group">
-                <h3 class="choose__number">100+</h3>
-                <p class="choose__subtitle">Awards</p>
-              </div>
+            <div class="ba-img"
+              style="background-image: url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=500&q=80');">
+              <span class="ba-badge badge-right">After</span>
             </div>
           </div>
-
-          <div class="choose__images">
-            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=800&fit=crop"
-              alt="choose img" class="choose__img" />
-
-            <div class="choose__triangle choose__triangle-1"></div>
-            <div class="choose__triangle choose__triangle-2"></div>
-            <div class="choose__triangle choose__triangle-3"></div>
+          <div style="padding: 1.5rem; text-align: center; background: var(--bg-surface);">
+            <h4>12 Week Cut</h4>
+            <p>Total Fat Loss: 18 lbs</p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- =============== TRANSFORMATIONS =================== -->
-    <section class="transformation section" id="transformations">
-      <div class="container">
-        <div class="section__data">
-          <h2 class="section__subtitle">Success Stories</h2>
-          <div class="section__titles">
-            <h1 class="section__title-border">CLIENT</h1>
-            <h1 class="section__title">TRANSFORMATIONS</h1>
+        <div class="ba-card">
+          <div class="ba-images">
+            <div class="ba-img"
+              style="background-image: url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=500&q=80');">
+              <span class="ba-badge badge-left">Before</span>
+            </div>
+            <div class="ba-img"
+              style="background-image: url('https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=500&q=80');">
+              <span class="ba-badge badge-right">After</span>
+            </div>
           </div>
-        </div>
-
-        <div class="transformation__container grid">
-          <article class="transformation__card">
-            <div class="transformation__slider-wrapper">
-              <div class="transformation__slider" data-slider="1">
-                <div class="transformation__before">
-                  <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&h=1000&fit=crop"
-                    alt="Before transformation" class="transformation__img" />
-                  <span class="transformation__label transformation__label-before">Before</span>
-                </div>
-                <div class="transformation__after">
-                  <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=1000&fit=crop"
-                    alt="After transformation" class="transformation__img" />
-                  <span class="transformation__label transformation__label-after">After</span>
-                </div>
-                <div class="transformation__divider">
-                  <div class="transformation__handle">
-                    <i class="ri-arrow-left-right-line"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="transformation__content">
-              <h3 class="transformation__name">John D.</h3>
-              <p class="transformation__stats">Lost 25kg • Gained Muscle • 6 Months</p>
-              <p class="transformation__testimonial">
-                "Jeewan's personalized training program completely transformed my life. His expertise and motivation
-                kept me going even on tough days."
-              </p>
-            </div>
-          </article>
-
-          <article class="transformation__card">
-            <div class="transformation__slider-wrapper">
-              <div class="transformation__slider" data-slider="2">
-                <div class="transformation__before">
-                  <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=1000&fit=crop"
-                    alt="Before transformation" class="transformation__img" />
-                  <span class="transformation__label transformation__label-before">Before</span>
-                </div>
-                <div class="transformation__after">
-                  <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=800&h=1000&fit=crop"
-                    alt="After transformation" class="transformation__img" />
-                  <span class="transformation__label transformation__label-after">After</span>
-                </div>
-                <div class="transformation__divider">
-                  <div class="transformation__handle">
-                    <i class="ri-arrow-left-right-line"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="transformation__content">
-              <h3 class="transformation__name">Sarah M.</h3>
-              <p class="transformation__stats">Toned Body • Increased Strength • 4 Months</p>
-              <p class="transformation__testimonial">
-                "The results speak for themselves. Jeewan's nutrition guidance and workout plans were exactly what I
-                needed to achieve my goals."
-              </p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================ PRICING ================ -->
-    <section class="pricing section" id="pricing">
-      <div class="container">
-        <div class="section__data">
-          <h2 class="section__subtitle">Pricing</h2>
-          <div class="section__titles">
-            <h1 class="section__title-border">OUR</h1>
-            <h1 class="section__title">SPECIAL PLAN</h1>
+          <div style="padding: 1.5rem; text-align: center; background: var(--bg-surface);">
+            <h4>6 Month Bulk</h4>
+            <p>Muscle Gained: 12 lbs</p>
           </div>
-        </div>
-
-        <div class="pricing__container grid">
-          <article class="pricing__card">
-            <header class="pricing__header">
-              <h1 class="pricing__title">BASIC PACKAGE</h1>
-              <h2 class="pricing__number">$200</h2>
-            </header>
-
-            <ul class="pricing__list">
-              <li class="pricing__item">
-                <i class="ri-checkbox-circle-line"></i> 5 Days In A Week
-              </li>
-              <li class="pricing__item">
-                <i class="ri-checkbox-circle-line"></i> 01 Sweatshirt
-              </li>
-              <li class="pricing__item pricing__item-opacity">
-                <i class="ri-checkbox-circle-line"></i> 01 Bottle of Protein
-              </li>
-              <li class="pricing__item pricing__item-opacity">
-                <i class="ri-checkbox-circle-line"></i> Access to Videos
-              </li>
-              <li class="pricing__item pricing__item-opacity">
-                <i class="ri-checkbox-circle-line"></i> Muscle Stretching
-              </li>
-            </ul>
-            <a href="#" class="button button__flex pricing__button">
-              Purchase Now <i class="ri-arrow-right-line"></i>
-            </a>
-          </article>
-
-          <article class="pricing__card pricing__card-active">
-            <header class="pricing__header">
-              <h1 class="pricing__title">PREMIUM PACKAGE</h1>
-              <h2 class="pricing__number">$240</h2>
-            </header>
-
-            <ul class="pricing__list">
-              <li class="pricing__item">
-                <i class="ri-checkbox-circle-line"></i> 5 Days In A Week
-              </li>
-              <li class="pricing__item">
-                <i class="ri-checkbox-circle-line"></i> 01 Sweatshirt
-              </li>
-              <li class="pricing__item">
-                <i class="ri-checkbox-circle-line"></i> 01 Bottle of Protein
-              </li>
-              <li class="pricing__item pricing__item-opacity">
-                <i class="ri-checkbox-circle-line"></i> Access to Videos
-              </li>
-              <li class="pricing__item pricing__item-opacity">
-                <i class="ri-checkbox-circle-line"></i> Muscle Stretching
-              </li>
-            </ul>
-            <a href="#" class="button button__flex pricing__button">
-              Purchase Now <i class="ri-arrow-right-line"></i>
-            </a>
-          </article>
-
-          <article class="pricing__card">
-            <header class="pricing__header">
-              <h1 class="pricing__title">DIAMOND PACKAGE</h1>
-              <h2 class="pricing__number">$420</h2>
-            </header>
-
-            <ul class="pricing__list">
-              <li class="pricing__item">
-                <i class="ri-checkbox-circle-line"></i> 5 Days In A Week
-              </li>
-              <li class="pricing__item">
-                <i class="ri-checkbox-circle-line"></i> 01 Sweatshirt
-              </li>
-              <li class="pricing__item">
-                <i class="ri-checkbox-circle-line"></i> 01 Bottle of Protein
-              </li>
-              <li class="pricing__item">
-                <i class="ri-checkbox-circle-line"></i> Access to Videos
-              </li>
-              <li class="pricing__item">
-                <i class="ri-checkbox-circle-line"></i> Muscle Stretching
-              </li>
-            </ul>
-            <a href="#" class="button button__flex pricing__button">
-              Purchase Now <i class="ri-arrow-right-line"></i>
-            </a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================== CERTIFICATIONS ================= -->
-    <section class="certifications section" id="certifications">
-      <div class="container">
-        <div class="section__data">
-          <h2 class="section__subtitle">Credentials</h2>
-          <div class="section__titles">
-            <h1 class="section__title-border">PROFESSIONAL</h1>
-            <h1 class="section__title">CERTIFICATIONS</h1>
-          </div>
-        </div>
-
-        <div class="certifications__container grid">
-          <article class="certifications__card">
-            <div class="certifications__image-wrapper">
-              <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop"
-                alt="NASM Certified Personal Trainer Certificate" class="certifications__image" />
-            </div>
-            <h3 class="certifications__title">Certified Personal Trainer</h3>
-            <p class="certifications__issuer">NASM (National Academy of Sports Medicine)</p>
-            <p class="certifications__description">
-              Comprehensive certification in personal training, exercise science, and client assessment.
-            </p>
-          </article>
-
-          <article class="certifications__card">
-            <div class="certifications__image-wrapper">
-              <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop"
-                alt="ISSA Nutrition Specialist Certificate" class="certifications__image" />
-            </div>
-            <h3 class="certifications__title">Nutrition Specialist</h3>
-            <p class="certifications__issuer">ISSA (International Sports Sciences Association)</p>
-            <p class="certifications__description">
-              Advanced certification in sports nutrition, meal planning, and dietary guidance for athletes.
-            </p>
-          </article>
-
-          <article class="certifications__card">
-            <div class="certifications__image-wrapper">
-              <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&h=400&fit=crop"
-                alt="NSCA Strength & Conditioning Certificate" class="certifications__image" />
-            </div>
-            <h3 class="certifications__title">Strength & Conditioning Coach</h3>
-            <p class="certifications__issuer">NSCA (National Strength and Conditioning Association)</p>
-            <p class="certifications__description">
-              Expert-level certification in strength training, athletic performance, and injury prevention.
-            </p>
-          </article>
-
-          <article class="certifications__card">
-            <div class="certifications__image-wrapper">
-              <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&h=400&fit=crop"
-                alt="ACE Functional Training Certificate" class="certifications__image" />
-            </div>
-            <h3 class="certifications__title">Functional Training Expert</h3>
-            <p class="certifications__issuer">ACE (American Council on Exercise)</p>
-            <p class="certifications__description">
-              Specialized training in functional movement patterns and corrective exercise techniques.
-            </p>
-          </article>
-
-          <article class="certifications__card">
-            <div class="certifications__image-wrapper">
-              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop"
-                alt="Yoga Alliance RYT 200 Certificate" class="certifications__image" />
-            </div>
-            <h3 class="certifications__title">Yoga & Flexibility Coach</h3>
-            <p class="certifications__issuer">YA (Yoga Alliance) - RYT 200</p>
-            <p class="certifications__description">
-              200-hour registered yoga teacher specializing in flexibility, mobility, and mindfulness practices.
-            </p>
-          </article>
-
-          <article class="certifications__card">
-            <div class="certifications__image-wrapper">
-              <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&h=400&fit=crop"
-                alt="American Red Cross CPR Certificate" class="certifications__image" />
-            </div>
-            <h3 class="certifications__title">CPR & First Aid Certified</h3>
-            <p class="certifications__issuer">American Red Cross</p>
-            <p class="certifications__description">
-              Current certification in CPR, AED, and First Aid for emergency response and client safety.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================== CALCULATE ================= -->
-    <section class="calculate section">
-      <div class="calculate__container container grid">
-        <div class="calculate__content">
-          <div class="section__titles">
-            <h1 class="section__title-border">CALCULATE</h1>
-            <h1 class="section__title">YOUR BMI</h1>
-          </div>
-
-          <p class="calculate__description">
-            The body mass index (BMI) calculator calculates body mass index
-            from your weight and height.
-          </p>
-
-          <form action="" class="calculate__form" id="calculate-form">
-            <div class="calculate__box">
-              <input type="number" placeholder="Height" class="calculate__input" id="calculate-cm" />
-              <label for="" class="calculate__label">cm</label>
-            </div>
-
-            <div class="calculate__box">
-              <input type="number" placeholder="Weight" class="calculate__input" id="calculate-kg" />
-              <label for="" class="calculate__label">kg</label>
-            </div>
-
-            <button type="submit" class="button button__flex">
-              Calculate Now <i class="ri-arrow-right-line"></i>
-            </button>
-          </form>
-
-          <p class="calculate__message" id="calculate-message"></p>
-        </div>
-
-        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=600&fit=crop" alt="calculate img"
-          class="calculate__img" />
-      </div>
-    </section>
-  </main>
-
-  <!-- ================ FOOTER =================== -->
-  <footer class="footer section" id="footer">
-    <div class="footer__container container grid">
-      <div class="empty">
-        <a href="#" class="footer__logo">
-          <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=40&h=40&fit=crop"
-            alt="footer logo" /> Jeewan Thapa Magar
-        </a>
-        <p class="footer__description">
-          Subscribe for company <br />
-          updates below.
-        </p>
-
-        <form action="" class="footer__form" id="contact-form">
-          <input type="email" name="user_email" placeholder="Your Email" class="footer__input" id="contact-user" />
-          <button type="submit" class="button">Subscribe</button>
-        </form>
-
-        <p class="footer__message" id="contact-message"></p>
-      </div>
-
-      <div class="footer__content">
-        <div class="empty">
-          <h3 class="footer__title">SERVICES</h3>
-
-          <ul class="footer__links">
-            <li>
-              <a href="#" class="footer__link">Flex Muscle</a>
-            </li>
-            <li>
-              <a href="#" class="footer__link">Cardio Exercise</a>
-            </li>
-            <li>
-              <a href="#" class="footer__link">Basic Yoga</a>
-            </li>
-            <li>
-              <a href="#" class="footer__link">Weight Lifting</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="empty">
-          <h3 class="footer__title">PRICING</h3>
-
-          <ul class="footer__links">
-            <li>
-              <a href="#" class="footer__link">Basic</a>
-            </li>
-            <li>
-              <a href="#" class="footer__link">Premium</a>
-            </li>
-            <li>
-              <a href="#" class="footer__link">Diamond</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="empty">
-          <h3 class="footer__title">COMPANY</h3>
-
-          <ul class="footer__links">
-            <li>
-              <a href="#" class="footer__link">About Us</a>
-            </li>
-            <li>
-              <a href="#" class="footer__link">Careers</a>
-            </li>
-            <li>
-              <a href="#" class="footer__link">Customers</a>
-            </li>
-            <li>
-              <a href="#" class="footer__link">Partners</a>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
+  </section>
 
+  <section class="section-padding testimonials" id="testimonials">
     <div class="container">
-      <div class="footer__group">
-        <ul class="footer__social">
-          <li>
-            <a href="#" target="_blank" class="footer__social-link">
-              <i class="ri-facebook-circle-fill"></i>
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_blank" class="footer__social-link">
-              <i class="ri-twitter-fill"> </i>
-            </a>
-          </li>
-          <li>
-            <a href="#" target="_blank" class="footer__social-link">
-              <i class="ri-instagram-line"></i>
-            </a>
-          </li>
-        </ul>
-
-        <span class="footer__copy">
-          &#169; Copyright Bedimcode. All rights reserved
-        </span>
+      <div class="section-header">
+        <h2>Client Stories</h2>
+        <span></span>
       </div>
+      <div class="testimonial-slider">
+        <div class="testimonial-track" id="track">
+          <div class="testimonial-card">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"
+              alt="Client" class="client-img">
+            <br>
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p class="client-text">"The level of detail Alex puts into the programming is unmatched. I didn't just lose
+              weight; I learned how to maintain my physique for life."</p>
+            <div class="client-name">Sarah Jenkins</div>
+          </div>
+          <div class="testimonial-card">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+              alt="Client" class="client-img">
+            <br>
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p class="client-text">"I was stuck at a plateau for 3 years. Within 2 months of training here, I broke
+              every personal record I had. Worth every penny."</p>
+            <div class="client-name">David Ross</div>
+          </div>
+        </div>
+        <div class="slider-dots" id="dots"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding container" id="certifications">
+    <div class="section-header">
+      <h2>Credentials</h2>
+      <span></span>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-item">
+        <i class="fas fa-certificate cert-icon"></i>
+        <h4>NASM CPT</h4>
+        <p>Certified Personal Trainer</p>
+      </div>
+      <div class="cert-item">
+        <i class="fas fa-apple-whole cert-icon"></i>
+        <h4>Precision Nutrition</h4>
+        <p>Level 2 Master Coach</p>
+      </div>
+      <div class="cert-item">
+        <i class="fas fa-heart-pulse cert-icon"></i>
+        <h4>Red Cross</h4>
+        <p>CPR/AED Certified</p>
+      </div>
+      <div class="cert-item">
+        <i class="fas fa-person-running cert-icon"></i>
+        <h4>CSCS</h4>
+        <p>Strength & Conditioning Specialist</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bmi-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>BMI Calculator</h2>
+        <span></span>
+        <p style="margin-top: 1rem;">Assess your health metrics instantly.</p>
+      </div>
+      <div class="bmi-wrapper">
+        <div class="form-group">
+          <label class="form-label"><i class="fas fa-ruler-vertical"></i> Height</label>
+          <div class="input-row">
+            <input type="number" id="feet" class="form-control" placeholder="Feet" min="0">
+            <input type="number" id="inches" class="form-control" placeholder="Inches" min="0" max="11">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><i class="fas fa-weight-hanging"></i> Weight</label>
+          <input type="number" id="weight" class="form-control" placeholder="Kilograms (kg)" min="0">
+        </div>
+        <button onclick="calculateBMI()" class="btn-primary btn-block">Calculate Status</button>
+
+        <div id="result-box" class="bmi-result-box">
+          <div class="bmi-score" id="bmi-score">0.0</div>
+          <h4 id="bmi-category" style="margin: 0.5rem 0;">-</h4>
+          <p id="bmi-message" style="font-size: 0.9rem;">Enter your details above.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="container">
+      <h2 style="margin-bottom: 2rem;">Ready to Train?</h2>
+      <div class="social-links">
+        <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+      <p class="footer-copy">&copy; 2024 Alex Morgan Fitness. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <!-- =============== SCROLL UP ================ -->
-  <a href="#" class="scrollup" id="scroll-up">
-    <i class="ri-arrow-up-line"></i>
-  </a>
+  <script>
+    // --- 1. Mobile Menu Toggle ---
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-  <!-- ============== EMAIL JS ===================== -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    mobileToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const icon = mobileToggle.querySelector('i');
+      if (navMenu.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
 
-  <!-- =============== MAIN JS =============== -->
-  <script src="assets/js/main.js"></script>
+    // Close mobile menu when clicking on a link
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        const icon = mobileToggle.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      });
+    });
+
+    // --- 2. Navbar Scroll Effect ---
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // --- 3. Theme Toggle Logic ---
+    const toggleBtn = document.getElementById('theme-toggle');
+    const icon = toggleBtn.querySelector('i');
+    const html = document.documentElement;
+
+    // Check local storage for preference
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    updateIcon(savedTheme);
+
+    toggleBtn.addEventListener('click', () => {
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateIcon(newTheme);
+    });
+
+    function updateIcon(theme) {
+      if (theme === 'dark') {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+      } else {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+      }
+    }
+
+    // --- 2. BMI Calculator Logic ---
+    function calculateBMI() {
+      const feet = parseFloat(document.getElementById('feet').value);
+      const inches = parseFloat(document.getElementById('inches').value) || 0;
+      const weight = parseFloat(document.getElementById('weight').value);
+
+      const resultBox = document.getElementById('result-box');
+
+      if (!feet || !weight) {
+        // Shake animation for error
+        resultBox.classList.add('show');
+        document.getElementById('bmi-category').innerText = "Please fill all fields";
+        document.getElementById('bmi-score').innerText = "--";
+        return;
+      }
+
+      // Convert Height to Meters: ((feet * 12) + inches) * 0.0254
+      const heightInMeters = ((feet * 12) + inches) * 0.0254;
+
+      // BMI Formula: kg / m^2
+      const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
+
+      let category = "";
+      let message = "";
+
+      if (bmi < 18.5) {
+        category = "Underweight";
+        message = "Focus on caloric surplus and strength training.";
+      } else if (bmi >= 18.5 && bmi < 24.9) {
+        category = "Healthy Weight";
+        message = "Great job! Maintain with balanced nutrition.";
+      } else if (bmi >= 25 && bmi < 29.9) {
+        category = "Overweight";
+        message = "Let's dial in your macros and cardio.";
+      } else {
+        category = "Obesity";
+        message = "We should consult on a specialized plan.";
+      }
+
+      document.getElementById('bmi-score').innerText = bmi;
+      document.getElementById('bmi-category').innerText = category;
+      document.getElementById('bmi-message').innerText = message;
+      resultBox.classList.add('show');
+    }
+
+    // --- 3. Testimonial Slider Logic ---
+    const track = document.getElementById('track');
+    const dotsContainer = document.getElementById('dots');
+    const slides = document.querySelectorAll('.testimonial-card');
+    let currentSlide = 0;
+
+    // Create dots
+    slides.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.dot');
+
+    function goToSlide(index) {
+      currentSlide = index;
+      const width = slides[0].clientWidth;
+      track.style.transform = `translateX(-${width * index}px)`;
+
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[index].classList.add('active');
+    }
+
+    // Auto slide every 5 seconds
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % slides.length;
+      goToSlide(currentSlide);
+    }, 5000);
+
+    // Handle window resize to reset slider position
+    window.addEventListener('resize', () => goToSlide(currentSlide));
+  </script>
 </body>
 
 </html>
