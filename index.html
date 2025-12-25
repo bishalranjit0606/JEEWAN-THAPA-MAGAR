@@ -2,830 +2,639 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Jeewan Thapa Magar | Elite Performance Coach</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Oswald:wght@400;500;700&display=swap"
-        rel="stylesheet">
+  <!-- =================== FAVICON ================ -->
+  <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon" />
 
-    <style>
-        /* --- 1. VARIABLES & RESET --- */
-        :root {
-            --bg-color: #050505;
-            --surface-color: #0F0F0F;
-            --text-primary: #F5F5F5;
-            --text-secondary: #888888;
-            --accent-gold: #D4AF37;
-            --accent-platinum: #E5E4E2;
-            --border-color: #222222;
-            --spacing-unit: 2rem;
-            --container-width: 1200px;
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+  <!-- ================== REMIXICON =================== -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <!-- ================== CSS ================= -->
+  <link rel="stylesheet" href="assets/css/style.css" />
 
-        html,
-        body {
-            overflow-x: hidden;
-            width: 100%;
-            position: relative;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4 {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 500;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            object-fit: cover;
-        }
-
-        /* --- 2. UTILITY CLASSES --- */
-        .container {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            width: 100%;
-        }
-
-        .section-padding {
-            padding: 5rem 0;
-        }
-
-        @media (min-width: 768px) {
-            .section-padding {
-                padding: 8rem 0;
-            }
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-gold {
-            color: var(--accent-gold);
-        }
-
-        .text-muted {
-            color: var(--text-secondary);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            border: 1px solid var(--text-primary);
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 0.85rem;
-            background: transparent;
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
-        }
-
-        .btn:hover {
-            background: var(--text-primary);
-            color: var(--bg-color);
-        }
-
-        .btn-gold {
-            border-color: var(--accent-gold);
-            color: var(--accent-gold);
-        }
-
-        .btn-gold:hover {
-            background: var(--accent-gold);
-            color: var(--bg-color);
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- 3. NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1.2rem 0;
-            transition: var(--transition);
-            background: rgba(5, 5, 5, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid transparent;
-        }
-
-        nav.scrolled {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .nav-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            z-index: 1001;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links li a {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--text-secondary);
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 100%;
-                height: 100vh;
-                background: var(--bg-color);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: 0.5s;
-                gap: 2.5rem;
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .nav-links li a {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* --- 4. HERO SECTION --- */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 6rem 0;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
-            background-attachment: scroll;
-        }
-
-        .hero-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        @media (min-width: 992px) {
-            .hero-container {
-                grid-template-columns: 1.2fr 0.8fr;
-            }
-
-            .hero {
-                background-attachment: fixed;
-            }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid var(--accent-gold);
-            margin-bottom: 1.5rem;
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            color: var(--accent-gold);
-        }
-
-        .hero-frame {
-            position: relative;
-            border: 1px solid var(--accent-gold);
-            padding: 10px;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        /* --- 5. CERTIFICATE SECTION --- */
-        .certificate-section {
-            background: radial-gradient(circle at top right, #111, var(--bg-color));
-            overflow: hidden;
-        }
-
-        .cert-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        @media (min-width: 992px) {
-            .cert-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .cert-info h2 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: 1.5rem;
-        }
-
-        .acc-item {
-            display: flex;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 3px solid var(--accent-gold);
-            margin-bottom: 1rem;
-        }
-
-        .cert-visual {
-            position: relative;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .verified-seal-new {
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 80px;
-            height: 80px;
-            background: url('https://www.transparentpng.com/download/gold-seal/certificate-gold-seal-png-image--14.png') no-repeat center/contain;
-            z-index: 5;
-        }
-
-        /* --- 6. ABOUT & STATS --- */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-        }
-
-        @media (min-width: 992px) {
-            .about-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 2rem;
-        }
-
-        .stat-item h3 {
-            font-size: 1.8rem;
-            color: var(--accent-gold);
-        }
-
-        .stat-item span {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            color: var(--text-secondary);
-        }
-
-        /* --- 7. SERVICES --- */
-        .services {
-            background-color: var(--surface-color);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .service-card {
-            background: var(--bg-color);
-            padding: 2.5rem;
-            border: 1px solid var(--border-color);
-        }
-
-        /* --- 8. COMPARISON SLIDER --- */
-        .comparison-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/10;
-            max-width: 900px;
-            margin: 0 auto;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            touch-action: pan-y;
-        }
-
-        .comp-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            pointer-events: none;
-        }
-
-        .img-overlay {
-            width: 50%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            overflow: hidden;
-            border-right: 2px solid var(--accent-gold);
-            z-index: 10;
-        }
-
-        .img-overlay .comp-img {
-            width: calc(var(--container-width) - 3rem);
-            /* Rough estimate to keep ratio */
-            max-width: 900px;
-            height: 100%;
-        }
-
-        @media (max-width: 900px) {
-            .img-overlay .comp-img {
-                width: 90vw;
-            }
-        }
-
-        .handle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            background: var(--accent-gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 20;
-            color: black;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            pointer-events: none;
-        }
-
-        /* --- 9. ANIMATED TESTIMONIAL MARQUEE --- */
-        .marquee-container {
-            width: 100%;
-            overflow: hidden;
-            padding: 2rem 0;
-            position: relative;
-            background: var(--bg-color);
-        }
-
-        /* Subtle edge fade */
-        .marquee-container::before,
-        .marquee-container::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            width: 15%;
-            height: 100%;
-            z-index: 2;
-        }
-
-        .marquee-container::before {
-            left: 0;
-            background: linear-gradient(to right, var(--bg-color), transparent);
-        }
-
-        .marquee-container::after {
-            right: 0;
-            background: linear-gradient(to left, var(--bg-color), transparent);
-        }
-
-        .marquee-track {
-            display: flex;
-            width: max-content;
-            gap: 2rem;
-            animation: scroll-left 40s linear infinite;
-        }
-
-        /* Slow down on hover for readability */
-        .marquee-track:hover {
-            animation-play-state: paused;
-        }
-
-        .testimonial-card {
-            width: 350px;
-            background: var(--surface-color);
-            padding: 2.5rem;
-            border: 1px solid var(--border-color);
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .testimonial-card p {
-            font-style: italic;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-        }
-
-        @keyframes scroll-left {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* --- 10. CONTACT --- */
-        .contact-layout {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-        }
-
-        @media (min-width: 992px) {
-            .contact-layout {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 0;
-            color: white;
-            border-radius: 0;
-        }
-
-        /* --- 11. FOOTER --- */
-        .copyright {
-            text-align: center;
-            margin-top: 4rem;
-            font-size: 0.75rem;
-            color: #444;
-            border-top: 1px solid var(--border-color);
-            padding-top: 2rem;
-        }
-    </style>
+  <title>Jeewan Thapa Magar - Professional Fitness Trainer</title>
 </head>
 
 <body>
+  <!-- ==================== HEADER ===================== -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="nav__logo">
+        <img src="assets/img/logo-nav.png" alt="logo" /> Jeewan Thapa Magar
+      </a>
 
-    <nav id="navbar">
-        <div class="container nav-inner">
-            <a href="#" class="logo">JEEWAN THAPA MAGAR</a>
-            <div class="menu-toggle" id="mobile-btn">☰</div>
-            <ul class="nav-links" id="nav-menu">
-                <li><a href="#about">Philosophy</a></li>
-                <li><a href="#services">Training</a></li>
-                <li><a href="#results">Results</a></li>
-                <li><a href="#contact" style="color: var(--accent-gold);">Apply Now</a></li>
-            </ul>
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="#home" class="nav__link">Home</a>
+          </li>
+          <li class="nav__item">
+            <a href="#program" class="nav__link">Program</a>
+          </li>
+          <li class="nav__item">
+            <a href="#choose" class="nav__link">Choose Us</a>
+          </li>
+          <li class="nav__item">
+            <a href="#pricing" class="nav__link">Pricing</a>
+          </li>
+          <li class="nav__item">
+            <a href="#certifications" class="nav__link">Certifications</a>
+          </li>
+
+          <div class="nav__link">
+            <a href="#footer" class="button nav__button">Register Now</a>
+          </div>
+        </ul>
+
+        <div class="nav__close" id="nav-close">
+          <i class="ri-close-line"></i>
         </div>
+      </div>
+
+      <div class="nav__actions">
+        <!-- Theme toggle button -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <i class="ri-sun-line" id="theme-icon"></i>
+        </button>
+
+        <!-- Menu toggle button -->
+        <div class="nav__toggle" id="nav-toggle">
+          <i class="ri-menu-line"></i>
+        </div>
+      </div>
     </nav>
+  </header>
 
-    <section class="hero">
-        <div class="container hero-container">
-            <div class="hero-content reveal">
-                <div class="hero-badge">★ Certified International Trainer</div>
-                <h1>Sculpt Your<br><span class="text-gold">Masterpiece</span></h1>
-                <p style="margin-bottom: 2rem; max-width: 500px;">Precision engineering for the human body. Elite
-                    coaching for those who demand excellence in every fiber.</p>
-                <a href="#contact" class="btn btn-gold">Start The Transformation</a>
-            </div>
-            <div class="hero-image-wrapper reveal">
-                <div class="hero-frame">
-                    <img src="main.jpg" alt="Jeewan Thapa Magar">
-                </div>
-            </div>
+  <!-- ==================== MAIN ===================== -->
+  <main class="main">
+    <!-- ================ HOME =================== -->
+    <section class="home section" id="home">
+      <div class="home__container container grid">
+        <div class="home__data">
+          <h2 class="home__subtitle">MAKE YOUR</h2>
+          <h1 class="home__title">BODY SHAPE</h1>
+          <p class="home__description">
+            In here we will help you to shape and build your ideal body and
+            live your life to the fullest.
+          </p>
+          <a href="#" class="button button__flex">
+            Get Started <i class="ri-arrow-right-line"></i>
+          </a>
         </div>
+
+        <div class="home__images">
+          <img src="main.jpeg" alt="Jeewan Thapa Magar - Professional Fitness Trainer" class="home__img" />
+        </div>
+      </div>
     </section>
 
-    <section class="certificate-section section-padding">
-        <div class="container cert-grid">
-            <div class="cert-info reveal">
-                <h4 class="text-gold" style="letter-spacing: 0.2em; font-size: 0.8rem; margin-bottom: 1rem;">ESTABLISHED
-                    EXCELLENCE</h4>
-                <h2>Elite Global Recognition</h2>
-
-                <div class="accreditation-list">
-                    <div class="acc-item">
-                        <div>
-                            <strong>Advanced Sports Science</strong>
-                            <p class="text-muted" style="font-size: 0.85rem;">International Bio-mechanics Standards</p>
-                        </div>
-                    </div>
-                    <div class="acc-item">
-                        <div>
-                            <strong>Performance Nutrition</strong>
-                            <p class="text-muted" style="font-size: 0.85rem;">Certified Metabolic Specialist</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cert-visual reveal">
-                <div class="verified-seal-new"></div>
-                <div style="background: #fff; padding: 10px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
-                    <img src="https://images.unsplash.com/photo-1589330694653-ded6df03f754?q=80&w=1000"
-                        alt="Certification">
-                </div>
-            </div>
-        </div>
+    <section class="logos section">
+      <div class="logos__container container grid">
+        <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=200&h=100&fit=crop" alt="logo img"
+          class="logos__img" />
+        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=200&h=100&fit=crop" alt="logo img"
+          class="logos__img" />
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=100&fit=crop" alt="logo img"
+          class="logos__img" />
+        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=200&h=100&fit=crop" alt="logo img"
+          class="logos__img" />
+      </div>
     </section>
 
-    <section id="about" class="section-padding">
-        <div class="container about-grid">
-            <div class="about-text reveal">
-                <h4 class="text-gold">// Philosophy</h4>
-                <h2 style="margin: 1rem 0;">Discipline Over Motivation</h2>
-                <p>True strength is forged through consistency. I don't just count reps—I engineer lifestyle changes. My
-                    methodology combines old-school bodybuilding with modern sports science.</p>
-                <div class="stats">
-                    <div class="stat-item">
-                        <h3>10+</h3><span>Years Exp</span>
-                    </div>
-                    <div class="stat-item">
-                        <h3>500+</h3><span>Clients</span>
-                    </div>
-                    <div class="stat-item">
-                        <h3>100%</h3><span>Focus</span>
-                    </div>
-                </div>
-            </div>
-            <div class="about-img reveal">
-                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1200" alt="Training"
-                    style="height: 100%; min-height: 300px;">
-            </div>
+    <!-- =================== PROGRAM ================= -->
+    <section class="program section" id="program">
+      <div class="container">
+        <div class="section__data">
+          <h2 class="section__subtitle">Our Program</h2>
+          <div class="section__titles">
+            <h1 class="section__title-border">BUILD YOUR</h1>
+            <h1 class="section__title">BEST BODY</h1>
+          </div>
         </div>
+
+        <div class="program__container grid">
+          <article class="program__card">
+            <h3 class="program__title">Flex Muscle</h3>
+
+            <p class="program__description">
+              Creating tension that's temporarily making the muscle fibers
+              smaller or contracted.
+            </p>
+
+            <a href="#" class="program__button">
+              <i class="ri-arrow-right-line"></i>
+            </a>
+          </article>
+
+          <article class="program__card">
+            <h3 class="program__title">Cardio Exercise</h3>
+
+            <p class="program__description">
+              Exercise your heart rate up and keeps it up for a prolonged
+              period of time.
+            </p>
+
+            <a href="#" class="program__button">
+              <i class="ri-arrow-right-line"></i>
+            </a>
+          </article>
+
+          <article class="program__card">
+            <h3 class="program__title">Basic Yoga</h3>
+
+            <p class="program__description">
+              Diaphragmatic this is the most common breathing technique you'll
+              find in yoga.
+            </p>
+
+            <a href="#" class="program__button">
+              <i class="ri-arrow-right-line"></i>
+            </a>
+          </article>
+
+          <article class="program__card">
+            <h3 class="program__title">Weight Lifting</h3>
+
+            <p class="program__description">
+              Attempts a maximum weight single lift of a barbell loaded with
+              weight plates.
+            </p>
+
+            <a href="#" class="program__button">
+              <i class="ri-arrow-right-line"></i>
+            </a>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section id="services" class="section-padding services">
-        <div class="container">
-            <div class="text-center reveal" style="margin-bottom: 3rem;">
-                <h2>Program Architecture</h2>
-                <p class="text-muted">Premium coaching tailored to your physiology.</p>
+    <!-- =============== CHOOSE US =================== -->
+    <section class="choose section" id="choose">
+      <div class="choose__overflow">
+        <div class="choose__container container grid">
+          <div class="choose__content">
+            <div class="section__data">
+              <h2 class="section__subtitle">Best Reason</h2>
+              <div class="section__titles">
+                <h1 class="section__title-border">WHY</h1>
+                <h1 class="section__title">CHOOSE US ?</h1>
+              </div>
             </div>
-            <div class="services-grid">
-                <div class="service-card reveal">
-                    <h3 class="text-gold">01. Hypertrophy</h3>
-                    <p class="text-muted" style="margin-top: 1rem;">Designed for aesthetic perfection. Focus on muscle
-                        separation, symmetry, and volume.</p>
-                </div>
-                <div class="service-card reveal">
-                    <h3 class="text-gold">02. Strength</h3>
-                    <p class="text-muted" style="margin-top: 1rem;">Raw power development. Focus on compound lifts and
-                        nervous system adaptation.</p>
-                </div>
-                <div class="service-card reveal">
-                    <h3 class="text-gold">03. Online</h3>
-                    <p class="text-muted" style="margin-top: 1rem;">Global access. Custom app, nutrition macros, and
-                        weekly video form analysis.</p>
-                </div>
+
+            <p class="choose__description">
+              Choose your favorite class and start now. Remember the only bad
+              workout is the one you didn't do.
+            </p>
+
+            <div class="choose__data">
+              <div class="choose__group">
+                <h3 class="choose__number">200+</h3>
+                <p class="choose__subtitle">Total Members</p>
+              </div>
+              <div class="choose__group">
+                <h3 class="choose__number">50+</h3>
+                <p class="choose__subtitle">Best trainers</p>
+              </div>
+              <div class="choose__group">
+                <h3 class="choose__number">25+</h3>
+                <p class="choose__subtitle">Programs</p>
+              </div>
+              <div class="choose__group">
+                <h3 class="choose__number">100+</h3>
+                <p class="choose__subtitle">Awards</p>
+              </div>
             </div>
+          </div>
+
+          <div class="choose__images">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=800&fit=crop"
+              alt="choose img" class="choose__img" />
+
+            <div class="choose__triangle choose__triangle-1"></div>
+            <div class="choose__triangle choose__triangle-2"></div>
+            <div class="choose__triangle choose__triangle-3"></div>
+          </div>
         </div>
+      </div>
     </section>
 
-    <section id="results" class="section-padding">
-        <div class="container">
-            <div class="text-center reveal" style="margin-bottom: 3rem;">
-                <h2>The Evidence</h2>
-                <p class="text-muted">Drag the slider to see the transformation.</p>
-            </div>
-            <div class="comparison-wrapper reveal" id="compWrapper">
-                <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=1200" class="comp-img"
-                    alt="After">
-                <div class="img-overlay" id="imgOverlay">
-                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=1200" class="comp-img"
-                        alt="Before">
-                </div>
-                <div class="handle" id="handle">↔</div>
-            </div>
+    <!-- =============== TRANSFORMATIONS =================== -->
+    <section class="transformation section" id="transformations">
+      <div class="container">
+        <div class="section__data">
+          <h2 class="section__subtitle">Success Stories</h2>
+          <div class="section__titles">
+            <h1 class="section__title-border">CLIENT</h1>
+            <h1 class="section__title">TRANSFORMATIONS</h1>
+          </div>
         </div>
+
+        <div class="transformation__container grid">
+          <article class="transformation__card">
+            <div class="transformation__slider-wrapper">
+              <div class="transformation__slider" data-slider="1">
+                <div class="transformation__before">
+                  <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&h=1000&fit=crop"
+                    alt="Before transformation" class="transformation__img" />
+                  <span class="transformation__label transformation__label-before">Before</span>
+                </div>
+                <div class="transformation__after">
+                  <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=1000&fit=crop"
+                    alt="After transformation" class="transformation__img" />
+                  <span class="transformation__label transformation__label-after">After</span>
+                </div>
+                <div class="transformation__divider">
+                  <div class="transformation__handle">
+                    <i class="ri-arrow-left-right-line"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="transformation__content">
+              <h3 class="transformation__name">John D.</h3>
+              <p class="transformation__stats">Lost 25kg • Gained Muscle • 6 Months</p>
+              <p class="transformation__testimonial">
+                "Jeewan's personalized training program completely transformed my life. His expertise and motivation
+                kept me going even on tough days."
+              </p>
+            </div>
+          </article>
+
+          <article class="transformation__card">
+            <div class="transformation__slider-wrapper">
+              <div class="transformation__slider" data-slider="2">
+                <div class="transformation__before">
+                  <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=1000&fit=crop"
+                    alt="Before transformation" class="transformation__img" />
+                  <span class="transformation__label transformation__label-before">Before</span>
+                </div>
+                <div class="transformation__after">
+                  <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=800&h=1000&fit=crop"
+                    alt="After transformation" class="transformation__img" />
+                  <span class="transformation__label transformation__label-after">After</span>
+                </div>
+                <div class="transformation__divider">
+                  <div class="transformation__handle">
+                    <i class="ri-arrow-left-right-line"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="transformation__content">
+              <h3 class="transformation__name">Sarah M.</h3>
+              <p class="transformation__stats">Toned Body • Increased Strength • 4 Months</p>
+              <p class="transformation__testimonial">
+                "The results speak for themselves. Jeewan's nutrition guidance and workout plans were exactly what I
+                needed to achieve my goals."
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <section id="testimonials" class="section-padding" style="overflow: hidden;">
-        <div class="container reveal">
-            <div class="text-center" style="margin-bottom: 3rem;">
-                <h4 class="text-gold">Testimonials</h4>
-                <h2>Real Client Results</h2>
-            </div>
+    <!-- ================ PRICING ================ -->
+    <section class="pricing section" id="pricing">
+      <div class="container">
+        <div class="section__data">
+          <h2 class="section__subtitle">Pricing</h2>
+          <div class="section__titles">
+            <h1 class="section__title-border">OUR</h1>
+            <h1 class="section__title">SPECIAL PLAN</h1>
+          </div>
         </div>
 
-        <div class="marquee-container">
-            <div class="marquee-track">
-                <div class="testimonial-card">
-                    <p>"Jeewan transformed my physique in 12 weeks. His attention to biomechanics is unmatched.
-                        Professional and precise."</p>
-                    <h4 class="text-gold" style="margin-top: 1.5rem;">— Alex R.</h4>
-                </div>
-                <div class="testimonial-card">
-                    <p>"The online coaching feels like he's right there in the gym with you. Best investment I've made
-                        in my health."</p>
-                    <h4 class="text-gold" style="margin-top: 1.5rem;">— Sarah M.</h4>
-                </div>
-                <div class="testimonial-card">
-                    <p>"Finally found a coach who prioritizes longevity and science over quick fixes. Highly
-                        recommended."</p>
-                    <h4 class="text-gold" style="margin-top: 1.5rem;">— David K.</h4>
-                </div>
-                <div class="testimonial-card">
-                    <p>"The custom nutrition plan was the missing piece of the puzzle. I've never felt or looked
-                        better."</p>
-                    <h4 class="text-gold" style="margin-top: 1.5rem;">— Jessica L.</h4>
-                </div>
+        <div class="pricing__container grid">
+          <article class="pricing__card">
+            <header class="pricing__header">
+              <h1 class="pricing__title">BASIC PACKAGE</h1>
+              <h2 class="pricing__number">$200</h2>
+            </header>
 
-                <div class="testimonial-card">
-                    <p>"Jeewan transformed my physique in 12 weeks. His attention to biomechanics is unmatched.
-                        Professional and precise."</p>
-                    <h4 class="text-gold" style="margin-top: 1.5rem;">— Alex R.</h4>
-                </div>
-                <div class="testimonial-card">
-                    <p>"The online coaching feels like he's right there in the gym with you. Best investment I've made
-                        in my health."</p>
-                    <h4 class="text-gold" style="margin-top: 1.5rem;">— Sarah M.</h4>
-                </div>
-                <div class="testimonial-card">
-                    <p>"Finally found a coach who prioritizes longevity and science over quick fixes. Highly
-                        recommended."</p>
-                    <h4 class="text-gold" style="margin-top: 1.5rem;">— David K.</h4>
-                </div>
-                <div class="testimonial-card">
-                    <p>"The custom nutrition plan was the missing piece of the puzzle. I've never felt or looked
-                        better."</p>
-                    <h4 class="text-gold" style="margin-top: 1.5rem;">— Jessica L.</h4>
-                </div>
-            </div>
+            <ul class="pricing__list">
+              <li class="pricing__item">
+                <i class="ri-checkbox-circle-line"></i> 5 Days In A Week
+              </li>
+              <li class="pricing__item">
+                <i class="ri-checkbox-circle-line"></i> 01 Sweatshirt
+              </li>
+              <li class="pricing__item pricing__item-opacity">
+                <i class="ri-checkbox-circle-line"></i> 01 Bottle of Protein
+              </li>
+              <li class="pricing__item pricing__item-opacity">
+                <i class="ri-checkbox-circle-line"></i> Access to Videos
+              </li>
+              <li class="pricing__item pricing__item-opacity">
+                <i class="ri-checkbox-circle-line"></i> Muscle Stretching
+              </li>
+            </ul>
+            <a href="#" class="button button__flex pricing__button">
+              Purchase Now <i class="ri-arrow-right-line"></i>
+            </a>
+          </article>
+
+          <article class="pricing__card pricing__card-active">
+            <header class="pricing__header">
+              <h1 class="pricing__title">PREMIUM PACKAGE</h1>
+              <h2 class="pricing__number">$240</h2>
+            </header>
+
+            <ul class="pricing__list">
+              <li class="pricing__item">
+                <i class="ri-checkbox-circle-line"></i> 5 Days In A Week
+              </li>
+              <li class="pricing__item">
+                <i class="ri-checkbox-circle-line"></i> 01 Sweatshirt
+              </li>
+              <li class="pricing__item">
+                <i class="ri-checkbox-circle-line"></i> 01 Bottle of Protein
+              </li>
+              <li class="pricing__item pricing__item-opacity">
+                <i class="ri-checkbox-circle-line"></i> Access to Videos
+              </li>
+              <li class="pricing__item pricing__item-opacity">
+                <i class="ri-checkbox-circle-line"></i> Muscle Stretching
+              </li>
+            </ul>
+            <a href="#" class="button button__flex pricing__button">
+              Purchase Now <i class="ri-arrow-right-line"></i>
+            </a>
+          </article>
+
+          <article class="pricing__card">
+            <header class="pricing__header">
+              <h1 class="pricing__title">DIAMOND PACKAGE</h1>
+              <h2 class="pricing__number">$420</h2>
+            </header>
+
+            <ul class="pricing__list">
+              <li class="pricing__item">
+                <i class="ri-checkbox-circle-line"></i> 5 Days In A Week
+              </li>
+              <li class="pricing__item">
+                <i class="ri-checkbox-circle-line"></i> 01 Sweatshirt
+              </li>
+              <li class="pricing__item">
+                <i class="ri-checkbox-circle-line"></i> 01 Bottle of Protein
+              </li>
+              <li class="pricing__item">
+                <i class="ri-checkbox-circle-line"></i> Access to Videos
+              </li>
+              <li class="pricing__item">
+                <i class="ri-checkbox-circle-line"></i> Muscle Stretching
+              </li>
+            </ul>
+            <a href="#" class="button button__flex pricing__button">
+              Purchase Now <i class="ri-arrow-right-line"></i>
+            </a>
+          </article>
         </div>
+      </div>
     </section>
 
-    <footer id="contact" class="section-padding" style="background: var(--surface-color);">
-        <div class="container">
-            <div class="contact-layout">
-                <div class="reveal">
-                    <h2>Ready to Commit?</h2>
-                    <p class="text-muted" style="margin: 1.5rem 0;">I only take on clients who are serious about their
-                        transformation. Spaces are limited.</p>
-                    <div style="display: flex; gap: 1.5rem;">
-                        <a href="#" class="text-gold">Instagram</a>
-                        <a href="#" class="text-gold">Email</a>
-                    </div>
-                </div>
-                <form class="reveal">
-                    <div class="form-group"><input type="text" placeholder="Name" required></div>
-                    <div class="form-group"><input type="email" placeholder="Email" required></div>
-                    <div class="form-group"><textarea rows="3" placeholder="Your Goal"></textarea></div>
-                    <button type="submit" class="btn btn-gold" style="margin-top: 2rem; width: 100%;">Apply Now</button>
-                </form>
-            </div>
-            <div class="copyright">&copy; 2025 Jeewan Thapa Magar.</div>
+    <!-- ================== CERTIFICATIONS ================= -->
+    <section class="certifications section" id="certifications">
+      <div class="container">
+        <div class="section__data">
+          <h2 class="section__subtitle">Credentials</h2>
+          <div class="section__titles">
+            <h1 class="section__title-border">PROFESSIONAL</h1>
+            <h1 class="section__title">CERTIFICATIONS</h1>
+          </div>
         </div>
-    </footer>
 
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            nav.classList.toggle('scrolled', window.scrollY > 50);
-        });
+        <div class="certifications__container grid">
+          <article class="certifications__card">
+            <div class="certifications__image-wrapper">
+              <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop"
+                alt="NASM Certified Personal Trainer Certificate" class="certifications__image" />
+            </div>
+            <h3 class="certifications__title">Certified Personal Trainer</h3>
+            <p class="certifications__issuer">NASM (National Academy of Sports Medicine)</p>
+            <p class="certifications__description">
+              Comprehensive certification in personal training, exercise science, and client assessment.
+            </p>
+          </article>
 
-        // Mobile menu toggle
-        const menuBtn = document.getElementById('mobile-btn');
-        const navMenu = document.getElementById('nav-menu');
+          <article class="certifications__card">
+            <div class="certifications__image-wrapper">
+              <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600&h=400&fit=crop"
+                alt="ISSA Nutrition Specialist Certificate" class="certifications__image" />
+            </div>
+            <h3 class="certifications__title">Nutrition Specialist</h3>
+            <p class="certifications__issuer">ISSA (International Sports Sciences Association)</p>
+            <p class="certifications__description">
+              Advanced certification in sports nutrition, meal planning, and dietary guidance for athletes.
+            </p>
+          </article>
 
-        menuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            menuBtn.innerHTML = navMenu.classList.contains('active') ? '✕' : '☰';
-        });
+          <article class="certifications__card">
+            <div class="certifications__image-wrapper">
+              <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600&h=400&fit=crop"
+                alt="NSCA Strength & Conditioning Certificate" class="certifications__image" />
+            </div>
+            <h3 class="certifications__title">Strength & Conditioning Coach</h3>
+            <p class="certifications__issuer">NSCA (National Strength and Conditioning Association)</p>
+            <p class="certifications__description">
+              Expert-level certification in strength training, athletic performance, and injury prevention.
+            </p>
+          </article>
 
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                menuBtn.innerHTML = '☰';
-            });
-        });
+          <article class="certifications__card">
+            <div class="certifications__image-wrapper">
+              <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&h=400&fit=crop"
+                alt="ACE Functional Training Certificate" class="certifications__image" />
+            </div>
+            <h3 class="certifications__title">Functional Training Expert</h3>
+            <p class="certifications__issuer">ACE (American Council on Exercise)</p>
+            <p class="certifications__description">
+              Specialized training in functional movement patterns and corrective exercise techniques.
+            </p>
+          </article>
 
-        // Scroll Reveal
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+          <article class="certifications__card">
+            <div class="certifications__image-wrapper">
+              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop"
+                alt="Yoga Alliance RYT 200 Certificate" class="certifications__image" />
+            </div>
+            <h3 class="certifications__title">Yoga & Flexibility Coach</h3>
+            <p class="certifications__issuer">YA (Yoga Alliance) - RYT 200</p>
+            <p class="certifications__description">
+              200-hour registered yoga teacher specializing in flexibility, mobility, and mindfulness practices.
+            </p>
+          </article>
 
-        // Slider Logic
-        const wrapper = document.getElementById('compWrapper');
-        const overlay = document.getElementById('imgOverlay');
-        const handle = document.getElementById('handle');
-        let isDragging = false;
+          <article class="certifications__card">
+            <div class="certifications__image-wrapper">
+              <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&h=400&fit=crop"
+                alt="American Red Cross CPR Certificate" class="certifications__image" />
+            </div>
+            <h3 class="certifications__title">CPR & First Aid Certified</h3>
+            <p class="certifications__issuer">American Red Cross</p>
+            <p class="certifications__description">
+              Current certification in CPR, AED, and First Aid for emergency response and client safety.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        const moveSlider = (clientX) => {
-            const rect = wrapper.getBoundingClientRect();
-            let x = clientX - rect.left;
-            let pos = (x / rect.width) * 100;
-            pos = Math.max(0, Math.min(pos, 100));
-            overlay.style.width = `${pos}%`;
-            handle.style.left = `${pos}%`;
-        };
+    <!-- ================== CALCULATE ================= -->
+    <section class="calculate section">
+      <div class="calculate__container container grid">
+        <div class="calculate__content">
+          <div class="section__titles">
+            <h1 class="section__title-border">CALCULATE</h1>
+            <h1 class="section__title">YOUR BMI</h1>
+          </div>
 
-        // Desktop Events
-        wrapper.addEventListener('mousedown', () => isDragging = true);
-        window.addEventListener('mouseup', () => isDragging = false);
-        window.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            moveSlider(e.clientX);
-        });
+          <p class="calculate__description">
+            The body mass index (BMI) calculator calculates body mass index
+            from your weight and height.
+          </p>
 
-        // Mobile Events
-        wrapper.addEventListener('touchstart', () => isDragging = true);
-        window.addEventListener('touchend', () => isDragging = false);
-        window.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            moveSlider(e.touches[0].clientX);
-        }, { passive: true });
-    </script>
+          <form action="" class="calculate__form" id="calculate-form">
+            <div class="calculate__box">
+              <input type="number" placeholder="Height" class="calculate__input" id="calculate-cm" />
+              <label for="" class="calculate__label">cm</label>
+            </div>
+
+            <div class="calculate__box">
+              <input type="number" placeholder="Weight" class="calculate__input" id="calculate-kg" />
+              <label for="" class="calculate__label">kg</label>
+            </div>
+
+            <button type="submit" class="button button__flex">
+              Calculate Now <i class="ri-arrow-right-line"></i>
+            </button>
+          </form>
+
+          <p class="calculate__message" id="calculate-message"></p>
+        </div>
+
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=600&fit=crop" alt="calculate img"
+          class="calculate__img" />
+      </div>
+    </section>
+  </main>
+
+  <!-- ================ FOOTER =================== -->
+  <footer class="footer section" id="footer">
+    <div class="footer__container container grid">
+      <div class="empty">
+        <a href="#" class="footer__logo">
+          <img src="assets/img/logo-nav.png" alt="footer logo" /> Jeewan Thapa Magar
+        </a>
+        <p class="footer__description">
+          Subscribe for company <br />
+          updates below.
+        </p>
+
+        <form action="" class="footer__form" id="contact-form">
+          <input type="email" name="user_email" placeholder="Your Email" class="footer__input" id="contact-user" />
+          <button type="submit" class="button">Subscribe</button>
+        </form>
+
+        <p class="footer__message" id="contact-message"></p>
+      </div>
+
+      <div class="footer__content">
+        <div class="empty">
+          <h3 class="footer__title">SERVICES</h3>
+
+          <ul class="footer__links">
+            <li>
+              <a href="#" class="footer__link">Flex Muscle</a>
+            </li>
+            <li>
+              <a href="#" class="footer__link">Cardio Exercise</a>
+            </li>
+            <li>
+              <a href="#" class="footer__link">Basic Yoga</a>
+            </li>
+            <li>
+              <a href="#" class="footer__link">Weight Lifting</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="empty">
+          <h3 class="footer__title">PRICING</h3>
+
+          <ul class="footer__links">
+            <li>
+              <a href="#" class="footer__link">Basic</a>
+            </li>
+            <li>
+              <a href="#" class="footer__link">Premium</a>
+            </li>
+            <li>
+              <a href="#" class="footer__link">Diamond</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="empty">
+          <h3 class="footer__title">COMPANY</h3>
+
+          <ul class="footer__links">
+            <li>
+              <a href="#" class="footer__link">About Us</a>
+            </li>
+            <li>
+              <a href="#" class="footer__link">Careers</a>
+            </li>
+            <li>
+              <a href="#" class="footer__link">Customers</a>
+            </li>
+            <li>
+              <a href="#" class="footer__link">Partners</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="footer__group">
+        <ul class="footer__social">
+          <li>
+            <a href="#" target="_blank" class="footer__social-link">
+              <i class="ri-facebook-circle-fill"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" target="_blank" class="footer__social-link">
+              <i class="ri-twitter-fill"> </i>
+            </a>
+          </li>
+          <li>
+            <a href="#" target="_blank" class="footer__social-link">
+              <i class="ri-instagram-line"></i>
+            </a>
+          </li>
+        </ul>
+
+        <span class="footer__copy">
+          &#169; Copyright Bedimcode. All rights reserved
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =============== SCROLL UP ================ -->
+  <a href="#" class="scrollup" id="scroll-up">
+    <i class="ri-arrow-up-line"></i>
+  </a>
+
+  <!-- ============== EMAIL JS ===================== -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- =============== MAIN JS =============== -->
+  <script src="assets/js/main.js"></script>
 </body>
 
 </html>
