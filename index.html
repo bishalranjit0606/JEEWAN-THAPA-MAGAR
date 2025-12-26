@@ -489,7 +489,9 @@
     /* --- YOUTUBE VIDEOS SCROLL --- */
     .video-scroll-wrapper {
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
+      scroll-snap-type: x proximity;
+      scroll-padding-left: 1rem;
+      -webkit-overflow-scrolling: touch;
       padding: 0.5rem 1rem 1.5rem;
     }
 
@@ -586,7 +588,9 @@
     /* --- SERVICES SCROLL (LIKE CERTIFICATES) --- */
     .services-scroll-wrapper {
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
+      scroll-snap-type: x proximity;
+      scroll-padding-left: 1rem;
+      -webkit-overflow-scrolling: touch;
       padding-bottom: 1rem;
       /* Added space for shadow */
       margin: 0 -1rem;
@@ -659,7 +663,9 @@
     /* Horizontal scroll for Results */
     .ba-scroll-wrapper {
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
+      scroll-snap-type: x proximity;
+      scroll-padding-left: 1rem;
+      -webkit-overflow-scrolling: touch;
       padding: 0.5rem 1rem 1.5rem 1rem;
     }
 
@@ -736,7 +742,9 @@
 
     .reviews-scroll-wrapper {
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
+      scroll-snap-type: x proximity;
+      scroll-padding-left: 1rem;
+      -webkit-overflow-scrolling: touch;
       padding: 0.5rem 1rem 1.5rem 1rem;
     }
 
@@ -802,7 +810,9 @@
     .cert-scroll-wrapper {
       position: relative;
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
+      scroll-snap-type: x proximity;
+      scroll-padding-left: 1rem;
+      -webkit-overflow-scrolling: touch;
       padding: 0.5rem 1rem 1.5rem 1rem;
     }
 
@@ -1355,6 +1365,18 @@
     @media (max-width: 768px) {
       html {
         font-size: 80%;
+      }
+    }
+
+    /* Disable snap on desktop for ultra-smooth feel */
+    @media (min-width: 1024px) {
+
+      .video-scroll-wrapper,
+      .services-scroll-wrapper,
+      .cert-scroll-wrapper,
+      .reviews-scroll-wrapper,
+      .ba-scroll-wrapper {
+        scroll-snap-type: none;
       }
     }
   </style>
