@@ -1391,6 +1391,80 @@
         padding-top: 6rem;
       }
     }
+
+    /* --- CERTIFICATE MODAL --- */
+    .cert-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(10px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .cert-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .cert-modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90vh;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .cert-modal.active .cert-modal-content {
+      transform: scale(1);
+    }
+
+    .cert-modal-image {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--accent-gold);
+    }
+
+    .cert-modal-close {
+      position: absolute;
+      top: -50px;
+      right: -10px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: color 0.3s, transform 0.3s;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cert-modal-close:hover {
+      color: var(--accent-gold);
+      transform: rotate(90deg);
+    }
+
+    @media (max-width: 768px) {
+      .cert-modal-close {
+        top: -50px;
+        right: 0;
+        font-size: 1.8rem;
+      }
+    }
   </style>
 </head>
 
@@ -1867,6 +1941,8 @@
     if (whatsappSticky && footer) {
       observer.observe(footer);
     }
+
+
   </script>
 
   <!-- 1. Floating WhatsApp Button (Desktop) -->
@@ -1882,6 +1958,41 @@
       <span>Chat on WhatsApp</span>
     </a>
   </div>
+  <!-- Certificate Modal -->
+  <div class="cert-modal" id="certModal">
+    <div class="cert-modal-content">
+      <button class="cert-modal-close" id="certModalClose">&times;</button>
+      <img src="" alt="Certificate Preview" class="cert-modal-image" id="certModalImage">
+    </div>
+  </div>
+
+  <script>
+    const certCards = document.querySelectorAll(".cert-card img");
+    const modal = document.getElementById("certModal");
+    const modalImg = document.getElementById("certModalImage");
+    const closeBtn = document.getElementById("certModalClose");
+
+    certCards.forEach(img => {
+      img.addEventListener("click", () => {
+        modalImg.src = img.src;
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden"; // prevent background scroll
+      });
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+    });
+
+    // Close when clicking outside image
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+    });
+  </script>
 </body>
 
 </html>
