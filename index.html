@@ -366,7 +366,7 @@
     .trainer-frame {
       position: relative;
       width: 100%;
-      max-width: 350px;
+      max-width: 21.875rem;
       aspect-ratio: 3.5 / 4.5;
       padding: 12px;
       background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-hover) 100%);
@@ -502,7 +502,7 @@
     }
 
     .video-card {
-      width: 260px;
+      width: 16.25rem;
       flex-shrink: 0;
       scroll-snap-align: start;
       background: var(--bg-surface);
@@ -582,11 +582,7 @@
     }
 
     /* Mobile tuning */
-    @media (max-width: 480px) {
-      .video-card {
-        width: 220px;
-      }
-    }
+    @media (max-width: 480px) {}
 
     /* --- SERVICES SCROLL (LIKE CERTIFICATES) --- */
     .services-scroll-wrapper {
@@ -596,7 +592,6 @@
       -webkit-overflow-scrolling: touch;
       padding-bottom: 1rem;
       /* Added space for shadow */
-      margin: 0 -1rem;
       /* Negative margin to allow full bleed scroll feeling if needed, or just standard */
       padding: 0.5rem 1rem 1.5rem 1rem;
       /* Top, Right, Bottom (shadow), Left */
@@ -610,7 +605,7 @@
 
     /* Smaller, premium cards */
     .services-scroll .service-card {
-      width: 260px;
+      width: 16.25rem;
       flex-shrink: 0;
       scroll-snap-align: start;
       padding: 1.25rem;
@@ -679,7 +674,7 @@
     }
 
     .ba-scroll .ba-card {
-      width: 360px;
+      width: 22.5rem;
       flex-shrink: 0;
       scroll-snap-align: start;
     }
@@ -761,7 +756,7 @@
       background: var(--bg-surface);
       border: 1px solid var(--border-light);
       border-radius: 12px;
-      width: 300px;
+      width: 18.75rem;
       padding: 2rem 1.5rem;
       text-align: center;
       flex-shrink: 0;
@@ -831,7 +826,7 @@
       background: var(--bg-surface);
       border: 1px solid var(--border-light);
       border-radius: 12px;
-      width: 260px;
+      width: 16.25rem;
       flex-shrink: 0;
       scroll-snap-align: start;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -1087,7 +1082,6 @@
       }
 
       .services-scroll .service-card {
-        width: 240px;
         padding: 2rem 1.5rem;
       }
 
@@ -1108,6 +1102,17 @@
       .container {
         padding: 0 1rem;
       }
+
+      /* Fix margins and padding for scroll wrappers on mobile */
+      .video-scroll-wrapper,
+      .services-scroll-wrapper,
+      .cert-scroll-wrapper,
+      .ba-scroll-wrapper,
+      .reviews-scroll-wrapper {
+        margin: 0 -1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
     }
 
     /* Small phones - Further refinements */
@@ -1125,9 +1130,7 @@
         padding: 1.75rem 1.25rem;
       }
 
-      .cert-card {
-        width: 200px;
-      }
+
 
       .cert-image-wrapper {
         aspect-ratio: 1 / 1;
@@ -1367,7 +1370,7 @@
     /* Mobile scale fix – make mobile look like 80% zoom */
     @media (max-width: 768px) {
       html {
-        font-size: 80%;
+        font-size: 85%;
       }
     }
 
