@@ -198,6 +198,9 @@
 
       let dragging = false;
       let pct = 50;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let locked = null;
 
       function setPosition(percent) {
         pct = Math.max(5, Math.min(95, percent));
@@ -211,32 +214,63 @@
         return ((clientX - rect.left) / rect.width) * 100;
       }
 
-      function onStart(e) {
+      function onMouseDown(e) {
         dragging = true;
         slider.classList.add('is-dragging');
-        const x = e.touches ? e.touches[0].clientX : e.clientX;
-        setPosition(getPercent(x));
+        setPosition(getPercent(e.clientX));
       }
 
-      function onMove(e) {
+      function onMouseMove(e) {
         if (!dragging) return;
         e.preventDefault();
-        const x = e.touches ? e.touches[0].clientX : e.clientX;
-        setPosition(getPercent(x));
+        setPosition(getPercent(e.clientX));
       }
 
-      function onEnd() {
+      function onMouseUp() {
         dragging = false;
         slider.classList.remove('is-dragging');
       }
 
-      slider.addEventListener('mousedown', onStart);
-      slider.addEventListener('touchstart', onStart, { passive: false });
-      slider.addEventListener('mousemove', onMove);
-      slider.addEventListener('touchmove', onMove, { passive: false });
-      window.addEventListener('mouseup', onEnd);
-      window.addEventListener('touchend', onEnd);
-      window.addEventListener('touchcancel', onEnd);
+      function onTouchStart(e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        locked = null;
+        dragging = false;
+      }
+
+      function onTouchMove(e) {
+        const touch = e.touches[0];
+        const dx = touch.clientX - touchStartX;
+        const dy = touch.clientY - touchStartY;
+
+        if (locked === null) {
+          if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+          locked = Math.abs(dx) > Math.abs(dy);
+        }
+
+        if (locked === false) return;
+
+        e.preventDefault();
+        if (!dragging) {
+          dragging = true;
+          slider.classList.add('is-dragging');
+        }
+        setPosition(getPercent(touch.clientX));
+      }
+
+      function onTouchEnd() {
+        dragging = false;
+        locked = null;
+        slider.classList.remove('is-dragging');
+      }
+
+      slider.addEventListener('mousedown', onMouseDown);
+      slider.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUp);
+      slider.addEventListener('touchstart', onTouchStart, { passive: true });
+      slider.addEventListener('touchmove', onTouchMove, { passive: false });
+      window.addEventListener('touchend', onTouchEnd);
+      window.addEventListener('touchcancel', onTouchEnd);
 
       slider.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') { e.preventDefault(); setPosition(pct - 5); }
