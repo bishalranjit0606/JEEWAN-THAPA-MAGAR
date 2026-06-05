@@ -1119,7 +1119,55 @@ body.menu-open {
   overflow: hidden;
   cursor: ew-resize;
   user-select: none;
-  touch-action: pan-y;
+  touch-action: none;
+}
+
+.ba-toggle {
+  display: none;
+  justify-content: center;
+  gap: 0;
+  padding: 0.75rem 1rem 0;
+}
+
+.ba-toggle-btn {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 10px 18px;
+  min-height: 44px;
+  border: 1px solid var(--border);
+  background: var(--bg-void);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.ba-toggle-btn:first-child {
+  border-radius: 999px 0 0 999px;
+  border-right: none;
+}
+
+.ba-toggle-btn:last-child {
+  border-radius: 0 999px 999px 0;
+}
+
+.ba-toggle-btn.is-active {
+  background: rgba(8, 8, 9, 0.75);
+  color: var(--gold);
+  border-color: var(--border-strong);
+}
+
+.ba-toggle-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  z-index: 1;
+}
+
+.results-desc-mobile,
+.ba-hint-mobile {
+  display: none;
 }
 
 .ba-slider img {
@@ -2157,9 +2205,42 @@ body.menu-open {
 
   .ba-slider { aspect-ratio: 4 / 5; }
 
-  .ba-handle::before {
-    width: 48px;
-    height: 48px;
+  .results-desc-desktop,
+  .ba-hint-desktop { display: none; }
+
+  .results-desc-mobile,
+  .ba-hint-mobile { display: inline; }
+
+  .ba-toggle { display: flex; }
+
+  .ba-handle { display: none; }
+
+  .ba-label { display: none; }
+
+  .ba-slider {
+    cursor: default;
+    touch-action: auto;
+    user-select: auto;
+  }
+
+  .ba-slider.is-showing-after .ba-before,
+  .ba-slider:not(.is-showing-before):not(.is-showing-after) .ba-before {
+    opacity: 0;
+  }
+
+  .ba-slider.is-showing-after .ba-after,
+  .ba-slider:not(.is-showing-before):not(.is-showing-after) .ba-after {
+    clip-path: none;
+    opacity: 1;
+  }
+
+  .ba-slider.is-showing-before .ba-before {
+    opacity: 1;
+  }
+
+  .ba-slider.is-showing-before .ba-after {
+    opacity: 0;
+    clip-path: none;
   }
 
   .testimonial-quote {

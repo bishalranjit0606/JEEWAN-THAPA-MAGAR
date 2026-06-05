@@ -189,7 +189,9 @@
     statItems.forEach((el) => statObserver.observe(el));
   }
 
-  /* --- Before/After Drag Slider --- */
+  /* --- Before/After — desktop drag slider --- */
+  const baDesktopMQ = window.matchMedia('(min-width: 769px)');
+
   function initBaSliders() {
     document.querySelectorAll('.ba-slider').forEach((slider) => {
       const afterImg = slider.querySelector('.ba-after');
@@ -198,9 +200,7 @@
 
       let dragging = false;
       let pct = 50;
-      let touchStartX = 0;
-      let touchStartY = 0;
-      let locked = null;
+      let listenersAttached = false;
 
       function setPosition(percent) {
         pct = Math.max(5, Math.min(95, percent));
@@ -231,56 +231,92 @@
         slider.classList.remove('is-dragging');
       }
 
-      function onTouchStart(e) {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-        locked = null;
-        dragging = false;
-      }
-
-      function onTouchMove(e) {
-        const touch = e.touches[0];
-        const dx = touch.clientX - touchStartX;
-        const dy = touch.clientY - touchStartY;
-
-        if (locked === null) {
-          if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
-          locked = Math.abs(dx) > Math.abs(dy);
-        }
-
-        if (locked === false) return;
-
-        e.preventDefault();
-        if (!dragging) {
-          dragging = true;
-          slider.classList.add('is-dragging');
-        }
-        setPosition(getPercent(touch.clientX));
-      }
-
-      function onTouchEnd() {
-        dragging = false;
-        locked = null;
-        slider.classList.remove('is-dragging');
-      }
-
-      slider.addEventListener('mousedown', onMouseDown);
-      slider.addEventListener('mousemove', onMouseMove);
-      window.addEventListener('mouseup', onMouseUp);
-      slider.addEventListener('touchstart', onTouchStart, { passive: true });
-      slider.addEventListener('touchmove', onTouchMove, { passive: false });
-      window.addEventListener('touchend', onTouchEnd);
-      window.addEventListener('touchcancel', onTouchEnd);
-
-      slider.addEventListener('keydown', (e) => {
+      function onKeydown(e) {
         if (e.key === 'ArrowLeft') { e.preventDefault(); setPosition(pct - 5); }
         if (e.key === 'ArrowRight') { e.preventDefault(); setPosition(pct + 5); }
-      });
+      }
 
-      setPosition(50);
+      function attachDesktopListeners() {
+        if (listenersAttached) return;
+        slider.addEventListener('mousedown', onMouseDown);
+        slider.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
+        slider.addEventListener('keydown', onKeydown);
+        setPosition(50);
+        listenersAttached = true;
+      }
+
+      function detachDesktopListeners() {
+        if (!listenersAttached) return;
+        slider.removeEventListener('mousedown', onMouseDown);
+        slider.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
+        slider.removeEventListener('keydown', onKeydown);
+        dragging = false;
+        slider.classList.remove('is-dragging');
+        listenersAttached = false;
+      }
+
+      function syncDesktopMode() {
+        if (baDesktopMQ.matches) attachDesktopListeners();
+        else detachDesktopListeners();
+      }
+
+      syncDesktopMode();
+      baDesktopMQ.addEventListener('change', syncDesktopMode);
     });
   }
+
+  /* --- Before/After — mobile tap toggle --- */
+  function initBaMobileToggle() {
+    document.querySelectorAll('.ba-card').forEach((card) => {
+      const slider = card.querySelector('.ba-slider');
+      const afterImg = slider?.querySelector('.ba-after');
+      const handle = slider?.querySelector('.ba-handle');
+      const buttons = card.querySelectorAll('.ba-toggle-btn');
+      if (!slider || !afterImg || !handle || !buttons.length) return;
+
+      function showView(view) {
+        slider.classList.toggle('is-showing-before', view === 'before');
+        slider.classList.toggle('is-showing-after', view === 'after');
+        buttons.forEach((btn) => {
+          const active = btn.dataset.view === view;
+          btn.classList.toggle('is-active', active);
+          btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+      }
+
+      function applyMobileState() {
+        if (baDesktopMQ.matches) {
+          slider.classList.remove('is-showing-before', 'is-showing-after');
+          slider.setAttribute('role', 'slider');
+          slider.setAttribute('tabindex', '0');
+          return;
+        }
+
+        afterImg.style.clipPath = '';
+        handle.style.left = '';
+        slider.removeAttribute('role');
+        slider.removeAttribute('tabindex');
+        slider.removeAttribute('aria-valuenow');
+        slider.classList.remove('is-dragging');
+        showView('after');
+      }
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (baDesktopMQ.matches) return;
+          showView(btn.dataset.view);
+        });
+      });
+
+      applyMobileState();
+      baDesktopMQ.addEventListener('change', applyMobileState);
+    });
+  }
+
   initBaSliders();
+  initBaMobileToggle();
 
   /* --- YouTube — open in new tab --- */
   document.querySelectorAll('.video-card').forEach((card) => {
