@@ -518,6 +518,40 @@
   }
   initCarousels();
 
+  /* --- Hero marquee — pixel-perfect loop (fonts + resize safe) --- */
+  function initHeroMarquee() {
+    const inner = document.querySelector('.hero-marquee-inner');
+    if (!inner || prefersReducedMotion) return;
+
+    const tracks = inner.querySelectorAll('.hero-marquee-track');
+    if (tracks.length < 2) return;
+
+    let rafId = null;
+    const updateMarqueeDistance = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const distance = tracks[1].offsetLeft;
+        if (distance > 0) {
+          inner.style.setProperty('--marquee-distance', `${distance}px`);
+        }
+      });
+    };
+
+    updateMarqueeDistance();
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(updateMarqueeDistance);
+    }
+
+    window.addEventListener('resize', updateMarqueeDistance, { passive: true });
+
+    if (typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(updateMarqueeDistance);
+      tracks.forEach((track) => ro.observe(track));
+    }
+  }
+  initHeroMarquee();
+
   /* --- Update nav CTA href --- */
   const navCta = document.querySelector('.nav-cta');
   if (navCta) navCta.href = WA_URL;

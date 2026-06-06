@@ -727,8 +727,10 @@ body.menu-open {
 
 .hero-marquee-inner {
   display: flex;
+  align-items: center;
+  gap: 2rem;
   width: max-content;
-  animation: heroMarquee 24s linear infinite;
+  animation: heroMarquee var(--marquee-duration, 24s) linear infinite;
   will-change: transform;
 }
 
@@ -866,8 +868,8 @@ body.menu-open {
 }
 
 @keyframes heroMarquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(-1 * var(--marquee-distance, 50%)), 0, 0); }
 }
 
 @keyframes scrollWheel {
