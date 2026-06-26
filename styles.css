@@ -728,9 +728,8 @@ body.menu-open {
 .hero-marquee-inner {
   display: flex;
   align-items: center;
-  gap: 2rem;
   width: max-content;
-  animation: heroMarquee var(--marquee-duration, 24s) linear infinite;
+  animation: heroMarquee var(--marquee-duration, 80s) linear infinite;
   will-change: transform;
 }
 

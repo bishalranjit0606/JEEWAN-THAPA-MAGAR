@@ -518,36 +518,57 @@
   }
   initCarousels();
 
-  /* --- Hero marquee — pixel-perfect loop (fonts + resize safe) --- */
+  /* --- Hero marquee — fill viewport + seamless loop --- */
   function initHeroMarquee() {
+    const marquee = document.querySelector('.hero-marquee');
     const inner = document.querySelector('.hero-marquee-inner');
-    if (!inner || prefersReducedMotion) return;
+    if (!marquee || !inner || prefersReducedMotion) return;
 
-    const tracks = inner.querySelectorAll('.hero-marquee-track');
-    if (tracks.length < 2) return;
+    const sourceTrack = inner.querySelector('.hero-marquee-track');
+    if (!sourceTrack) return;
 
+    const originalItems = Array.from(sourceTrack.children).map((node) => node.cloneNode(true));
     let rafId = null;
-    const updateMarqueeDistance = () => {
+
+    const buildMarquee = () => {
       if (rafId) cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
-        const distance = tracks[1].offsetLeft;
+        inner.replaceChildren();
+
+        const track = document.createElement('div');
+        track.className = 'hero-marquee-track';
+        originalItems.forEach((node) => track.appendChild(node.cloneNode(true)));
+
+        const viewport = marquee.offsetWidth;
+        let guard = 0;
+        while (track.scrollWidth < viewport && guard < 20) {
+          originalItems.forEach((node) => track.appendChild(node.cloneNode(true)));
+          guard += 1;
+        }
+
+        const clone = track.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        inner.append(track, clone);
+
+        const distance = track.offsetWidth;
         if (distance > 0) {
           inner.style.setProperty('--marquee-distance', `${distance}px`);
+          inner.style.setProperty('--marquee-duration', `${distance / 36}s`);
         }
       });
     };
 
-    updateMarqueeDistance();
+    buildMarquee();
 
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(updateMarqueeDistance);
+      document.fonts.ready.then(buildMarquee);
     }
 
-    window.addEventListener('resize', updateMarqueeDistance, { passive: true });
+    window.addEventListener('resize', buildMarquee, { passive: true });
 
     if (typeof ResizeObserver !== 'undefined') {
-      const ro = new ResizeObserver(updateMarqueeDistance);
-      tracks.forEach((track) => ro.observe(track));
+      const ro = new ResizeObserver(buildMarquee);
+      ro.observe(marquee);
     }
   }
   initHeroMarquee();
