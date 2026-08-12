@@ -34,7 +34,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="styles.css?v=20260606">
+  <link rel="stylesheet" href="styles.css?v=20260812">
 
   <!-- Schema.org -->
   <script type="application/ld+json">
@@ -93,6 +93,41 @@
 </head>
 
 <body>
+  <!-- Welcome transformation popup -->
+  <div class="transform-popup" id="transform-popup" role="dialog" aria-modal="true" aria-labelledby="transform-popup-title" aria-hidden="true">
+    <div class="transform-popup__backdrop" data-popup-close></div>
+    <div class="transform-popup__panel" role="document">
+      <button type="button" class="transform-popup__close" data-popup-close aria-label="Close">
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+      <p class="transform-popup__eyebrow">Client Transformation</p>
+      <h2 class="transform-popup__title" id="transform-popup-title">100 kg to 73 kg</h2>
+      <p class="transform-popup__desc">Real progress. 27 kg fat loss with dedicated coaching.</p>
+      <div class="transform-popup__grid">
+        <figure class="transform-popup__shot">
+          <img src="real/7.jpeg" alt="Before at 100 kg" width="400" height="500">
+          <figcaption>
+            <span class="transform-popup__tag">Before</span>
+            <strong>100 kg</strong>
+          </figcaption>
+        </figure>
+        <figure class="transform-popup__shot">
+          <img src="real/8.jpeg" alt="Progress at 83 kg" width="400" height="500">
+          <figcaption>
+            <span class="transform-popup__tag">Progress</span>
+            <strong>83 kg</strong>
+          </figcaption>
+        </figure>
+        <figure class="transform-popup__shot transform-popup__shot--after">
+          <img src="real/8v2.jpeg" alt="After at 73 kg" width="400" height="500">
+          <figcaption>
+            <span class="transform-popup__tag">After</span>
+            <strong>73 kg</strong>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
 
   <div class="grain" aria-hidden="true"></div>
 
@@ -354,7 +389,26 @@
       </div>
 
       <div class="results-grid">
-        <article class="ba-card reveal">
+        <article class="ba-card ba-card--stages reveal">
+          <div class="ba-toggle ba-toggle--stages" role="group" aria-label="View progress: 100 kg to 73 kg">
+            <button type="button" class="ba-toggle-btn" data-stage="0" aria-pressed="false">100 kg</button>
+            <button type="button" class="ba-toggle-btn" data-stage="1" aria-pressed="false">83 kg</button>
+            <button type="button" class="ba-toggle-btn is-active" data-stage="2" aria-pressed="true">73 kg</button>
+          </div>
+          <div class="ba-stages" aria-label="Weight loss progress: 100 kg to 73 kg">
+            <img src="real/7.jpeg" alt="Before — 100 kg" class="ba-stage" data-stage="0" loading="lazy">
+            <img src="real/8.jpeg" alt="Progress — 83 kg" class="ba-stage" data-stage="1" loading="lazy">
+            <img src="real/8v2.jpeg" alt="After — 73 kg" class="ba-stage is-active" data-stage="2" loading="lazy">
+            <span class="ba-label ba-label--stage">After · 73 kg</span>
+          </div>
+          <div class="ba-info">
+            <h3>100 kg to 73 kg</h3>
+            <p>Total Fat Loss: 27 kg</p>
+            <p class="ba-hint">Tap a weight to see each stage</p>
+          </div>
+        </article>
+
+        <article class="ba-card reveal reveal-delay-1">
           <div class="ba-toggle" role="group" aria-label="Compare before and after: 88 kg to 80 kg">
             <button type="button" class="ba-toggle-btn" data-view="before" aria-pressed="false">Before</button>
             <button type="button" class="ba-toggle-btn is-active" data-view="after" aria-pressed="true">After</button>
@@ -370,26 +424,6 @@
           <div class="ba-info">
             <h3>88 kg to 80 kg</h3>
             <p>Total Fat Loss: 8 kg</p>
-            <p class="ba-hint"><span class="ba-hint-desktop">Drag to compare</span><span class="ba-hint-mobile">Tap Before or After to compare</span></p>
-          </div>
-        </article>
-
-        <article class="ba-card reveal reveal-delay-1">
-          <div class="ba-toggle" role="group" aria-label="Compare before and after: Client Transformation">
-            <button type="button" class="ba-toggle-btn" data-view="before" aria-pressed="false">Before</button>
-            <button type="button" class="ba-toggle-btn is-active" data-view="after" aria-pressed="true">After</button>
-          </div>
-          <div class="ba-slider" role="slider" aria-label="Before and after comparison: Client Transformation"
-            aria-valuemin="5" aria-valuemax="95" aria-valuenow="50" tabindex="0">
-            <img src="real/7.jpeg" alt="Before — Client Transformation" class="ba-before" loading="lazy">
-            <img src="real/8.jpeg" alt="After — Client Transformation" class="ba-after" loading="lazy">
-            <span class="ba-label ba-label--before">Before</span>
-            <span class="ba-label ba-label--after">After</span>
-            <div class="ba-handle" aria-hidden="true"></div>
-          </div>
-          <div class="ba-info">
-            <h3>Client Transformation</h3>
-            <p>Real progress with dedicated coaching</p>
             <p class="ba-hint"><span class="ba-hint-desktop">Drag to compare</span><span class="ba-hint-mobile">Tap Before or After to compare</span></p>
           </div>
         </article>
@@ -761,7 +795,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=20260606"></script>
+  <script src="script.js?v=20260812"></script>
 </body>
 
 </html>

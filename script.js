@@ -269,7 +269,7 @@
 
   /* --- Before/After — mobile tap toggle --- */
   function initBaMobileToggle() {
-    document.querySelectorAll('.ba-card').forEach((card) => {
+    document.querySelectorAll('.ba-card:not(.ba-card--stages)').forEach((card) => {
       const slider = card.querySelector('.ba-slider');
       const afterImg = slider?.querySelector('.ba-after');
       const handle = slider?.querySelector('.ba-handle');
@@ -317,6 +317,41 @@
 
   initBaSliders();
   initBaMobileToggle();
+
+  /* --- Before/After — multi-stage progress --- */
+  function initBaStages() {
+    const stageLabels = {
+      0: 'Before · 100 kg',
+      1: 'Progress · 83 kg',
+      2: 'After · 73 kg',
+    };
+
+    document.querySelectorAll('.ba-card--stages').forEach((card) => {
+      const stages = card.querySelectorAll('.ba-stage');
+      const buttons = card.querySelectorAll('.ba-toggle-btn[data-stage]');
+      const label = card.querySelector('.ba-label--stage');
+      if (!stages.length || !buttons.length) return;
+
+      function showStage(stage) {
+        const key = String(stage);
+        stages.forEach((img) => {
+          img.classList.toggle('is-active', img.dataset.stage === key);
+        });
+        buttons.forEach((btn) => {
+          const active = btn.dataset.stage === key;
+          btn.classList.toggle('is-active', active);
+          btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        if (label) label.textContent = stageLabels[key] || '';
+      }
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => showStage(btn.dataset.stage));
+      });
+    });
+  }
+
+  initBaStages();
 
   /* --- YouTube — open in new tab --- */
   document.querySelectorAll('.video-card').forEach((card) => {
@@ -576,4 +611,49 @@
   /* --- Update nav CTA href --- */
   const navCta = document.querySelector('.nav-cta');
   if (navCta) navCta.href = WA_URL;
+
+  /* --- Welcome transformation popup --- */
+  function initTransformPopup() {
+    const popup = document.getElementById('transform-popup');
+    if (!popup) return;
+
+    const closeBtn = popup.querySelector('.transform-popup__close');
+
+    function openPopup() {
+      popup.classList.add('is-open');
+      popup.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('popup-open');
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closePopup() {
+      popup.classList.remove('is-open');
+      popup.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('popup-open');
+      try {
+        sessionStorage.setItem('transformPopupSeen', '1');
+      } catch (_) { /* ignore */ }
+    }
+
+    popup.querySelectorAll('[data-popup-close]').forEach((el) => {
+      el.addEventListener('click', closePopup);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popup.classList.contains('is-open')) {
+        closePopup();
+      }
+    });
+
+    let alreadySeen = false;
+    try {
+      alreadySeen = sessionStorage.getItem('transformPopupSeen') === '1';
+    } catch (_) { /* ignore */ }
+
+    if (!alreadySeen) {
+      window.setTimeout(openPopup, prefersReducedMotion ? 0 : 600);
+    }
+  }
+
+  initTransformPopup();
 })();
