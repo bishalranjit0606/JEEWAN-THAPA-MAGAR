@@ -1580,23 +1580,27 @@ body.menu-open {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-void);
-  border: 1px solid var(--border);
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
   color: var(--text-primary);
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   cursor: pointer;
-  transition: color 0.25s, border-color 0.25s, transform 0.25s;
+  transition: color 0.25s, transform 0.25s;
+}
+
+.transform-popup__close:hover,
+.transform-popup__close:focus,
+.transform-popup__close:focus-visible {
+  color: var(--gold);
+  outline: none;
+  box-shadow: none;
+  border: none;
 }
 
 .transform-popup__close:hover {
-  color: var(--gold);
-  border-color: var(--gold);
   transform: rotate(90deg);
-}
-
-.transform-popup__close:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
 }
 
 .transform-popup__eyebrow {

@@ -623,7 +623,6 @@
       popup.classList.add('is-open');
       popup.setAttribute('aria-hidden', 'false');
       document.body.classList.add('popup-open');
-      if (closeBtn) closeBtn.focus();
     }
 
     function closePopup() {
